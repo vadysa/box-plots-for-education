@@ -1,0 +1,5071 @@
+openapi: 3.0.1
+info:
+  title: ShipControl Service API
+  description: Ядро обработки.
+  version: v1
+paths:
+  /api/v1/configuration/Aggregation/NineCams/config:
+    get:
+      tags:
+        - AggregationConfiguration
+      summary: Возвращает текущий конфигурационный файл сервиса.
+      responses:
+        '200':
+          description: Success
+  /api/v1/configuration/Aggregation/NineCams/startAll:
+    post:
+      tags:
+        - AggregationConfiguration
+      summary: Запустить процесс передачи линии горизонта для всех камер.
+      responses:
+        '200':
+          description: Success
+        '500':
+          description: Server Error
+  /api/v1/configuration/Aggregation/NineCams/stopAll:
+    post:
+      tags:
+        - AggregationConfiguration
+      summary: Остановить процесс передачи линии горизонта для всех камер.
+      responses:
+        '200':
+          description: Success
+        '500':
+          description: Server Error
+  /api/v1/configuration/Aggregation/NineCams/limitAll:
+    put:
+      tags:
+        - AggregationConfiguration
+      summary: Устанавливает нижний порог достоверность линий горизонта для всех камер.
+      parameters:
+        - name: minConfidence
+          in: query
+          description: Минимальная достоверность линий горизонта.
+          schema:
+            type: number
+            format: float
+      responses:
+        '200':
+          description: Success
+        '500':
+          description: Server Error
+  /api/v1/configuration/Aggregation/NineCams/limit/rollbackAll:
+    delete:
+      tags:
+        - AggregationConfiguration
+      summary: Сбрасывает нижний порог достоверности линий горизонта для всех камер.
+      responses:
+        '200':
+          description: Success
+        '500':
+          description: Server Error
+  /api/v1/configuration/Aggregation/NineCams/start:
+    post:
+      tags:
+        - AggregationConfiguration
+      summary: Запустить процесс передачи линии горизонта для камеры type.
+      parameters:
+        - name: type
+          in: query
+          description: |-
+
+
+            CAM1 (Основная камера.)
+
+            CAM2
+
+            CAM3
+
+            CAM4
+
+            CAM5
+
+            CAM6
+
+            CAM7
+
+            CAM8
+
+            CAM9
+          schema:
+            $ref: '#/components/schemas/NineCams'
+          x-enumNames:
+            - Cam1
+            - Cam2
+            - Cam3
+            - Cam4
+            - Cam5
+            - Cam6
+            - Cam7
+            - Cam8
+            - Cam9
+          x-enumDescriptions:
+            - Основная камера.
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+      responses:
+        '200':
+          description: Success
+        '500':
+          description: Server Error
+  /api/v1/configuration/Aggregation/NineCams/stop:
+    post:
+      tags:
+        - AggregationConfiguration
+      summary: Остановить процесс передачи линии горизонта для камеры type.
+      parameters:
+        - name: type
+          in: query
+          description: |-
+
+
+            CAM1 (Основная камера.)
+
+            CAM2
+
+            CAM3
+
+            CAM4
+
+            CAM5
+
+            CAM6
+
+            CAM7
+
+            CAM8
+
+            CAM9
+          schema:
+            $ref: '#/components/schemas/NineCams'
+          x-enumNames:
+            - Cam1
+            - Cam2
+            - Cam3
+            - Cam4
+            - Cam5
+            - Cam6
+            - Cam7
+            - Cam8
+            - Cam9
+          x-enumDescriptions:
+            - Основная камера.
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+      responses:
+        '200':
+          description: Success
+        '500':
+          description: Server Error
+  /api/v1/configuration/Aggregation/NineCams/limit:
+    put:
+      tags:
+        - AggregationConfiguration
+      summary: Устанавливает нижний порог достоверность линий горизонта для камеры type.
+      parameters:
+        - name: type
+          in: query
+          description: |-
+
+
+            CAM1 (Основная камера.)
+
+            CAM2
+
+            CAM3
+
+            CAM4
+
+            CAM5
+
+            CAM6
+
+            CAM7
+
+            CAM8
+
+            CAM9
+          schema:
+            $ref: '#/components/schemas/NineCams'
+          x-enumNames:
+            - Cam1
+            - Cam2
+            - Cam3
+            - Cam4
+            - Cam5
+            - Cam6
+            - Cam7
+            - Cam8
+            - Cam9
+          x-enumDescriptions:
+            - Основная камера.
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+        - name: minConfidence
+          in: query
+          description: Минимальная достоверность линий горизонта.
+          schema:
+            type: number
+            format: float
+      responses:
+        '200':
+          description: Success
+        '500':
+          description: Server Error
+  /api/v1/configuration/Aggregation/NineCams/limit/rollback:
+    delete:
+      tags:
+        - AggregationConfiguration
+      summary: Сбрасывает нижний порог достоверности линий горизонта для камеры type.
+      parameters:
+        - name: type
+          in: query
+          description: |-
+
+
+            CAM1 (Основная камера.)
+
+            CAM2
+
+            CAM3
+
+            CAM4
+
+            CAM5
+
+            CAM6
+
+            CAM7
+
+            CAM8
+
+            CAM9
+          schema:
+            $ref: '#/components/schemas/NineCams'
+          x-enumNames:
+            - Cam1
+            - Cam2
+            - Cam3
+            - Cam4
+            - Cam5
+            - Cam6
+            - Cam7
+            - Cam8
+            - Cam9
+          x-enumDescriptions:
+            - Основная камера.
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+      responses:
+        '200':
+          description: Success
+        '500':
+          description: Server Error
+  /api/v1/ans2/attention/byId:
+    post:
+      tags:
+        - Ans2Attention
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+  /api/v1/ans2/attention/byGps:
+    post:
+      tags:
+        - Ans2Attention
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/AttentionByGps'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttentionByGps'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AttentionByGps'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AttentionByGps'
+      responses:
+        '200':
+          description: Success
+  /api/v1/ans2/weather:
+    get:
+      tags:
+        - Ans2Data
+      summary: Возвращает информацию о погодных условиях.
+      responses:
+        '200':
+          description: Информация о погодных условиях.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherInfoTrackLastUpdateWithDate'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/ans2/ownShip:
+    get:
+      tags:
+        - Ans2Data
+      summary: Возвращает информацию о корабле, на котором установлена система.
+      responses:
+        '200':
+          description: Информация о корабле, на котором установлена система.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OwnShipDataTrackLastUpdateWithDate'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/ans2/ownShip/gps:
+    get:
+      tags:
+        - Ans2Data
+      summary: Возвращает информацию о местонахождение корабле, на котором установлена система.
+      responses:
+        '200':
+          description: Информация о местонахождение корабле, на котором установлена система.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GpsPositionTrackLastUpdateWithDate'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/ans2/targets/basicInfo:
+    get:
+      tags:
+        - Ans2Data
+      summary: Возвращает список из базовой информации о целях.
+      parameters:
+        - name: sourceType
+          in: query
+          description: |-
+            Тип источника данных.
+
+            Ans2
+
+            Ais
+
+            Radar
+          schema:
+            $ref: '#/components/schemas/TargetSourceType'
+          x-enumNames:
+            - Ans2
+            - Ais
+            - Radar
+          x-enumDescriptions:
+            - ''
+            - ''
+            - ''
+        - name: sourceId
+          in: query
+          description: ИД источника данных.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Список из базовой информации о целях.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BasicTargetDataTrackLastUpdateWithDate'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/ans2/target/{id}/basicInfo:
+    get:
+      tags:
+        - Ans2Data
+      summary: Возвращает базовую информацию об отождествлённой цели с ИД id.
+      parameters:
+        - name: id
+          in: path
+          description: ИД отождествлённой цели.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Базовая информация об отождествлённой цели с ИД id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicTargetDataTrackLastUpdateWithDate'
+        '404':
+          description: Отождествлённая цель с ИД id не найдена.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/ans2/target/{id}/all:
+    get:
+      tags:
+        - Ans2Data
+      summary: Возвращает полную информацию об отождествлённой цели с ИД id.
+      parameters:
+        - name: id
+          in: path
+          description: ИД отождествлённой цели.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Полная информация об отождествлённой цели с ИД id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TargetInfoTrackLastUpdateWithDate'
+        '404':
+          description: Отождествлённая цель с ИД id не найдена.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/ans2/target/ais/{sourceId}/{id}/basicInfo:
+    get:
+      tags:
+        - Ans2Data
+      summary: Возвращает базовую информацию о цели АИС с ИД id.
+      parameters:
+        - name: sourceId
+          in: path
+          description: ИД источника данных АИС.
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: ИД цели АИС.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Базовая информация о цели АИС с ИД id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicTargetDataTrackLastUpdateWithDate'
+        '404':
+          description: Цель АИС с ИД id не найдена.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/ans2/target/ais/{sourceId}/{id}/all:
+    get:
+      tags:
+        - Ans2Data
+      summary: Возвращает полную информацию о цели АИС с ИД id.
+      parameters:
+        - name: sourceId
+          in: path
+          description: ИД источника данных АИС.
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: ИД цели АИС.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Полная информация о цели АИС с ИД id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TargetInfoTrackLastUpdateWithDate'
+        '404':
+          description: Цель АИС с ИД id не найдена.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/ans2/target/radar/{sourceId}/{id}/basicInfo:
+    get:
+      tags:
+        - Ans2Data
+      summary: Возвращает базовую информацию о цели РЛС с ИД id.
+      parameters:
+        - name: sourceId
+          in: path
+          description: ИД источника данных РЛС.
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: ИД цели РЛС.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Базовая информация о цели РЛС с ИД id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicTargetDataTrackLastUpdateWithDate'
+        '404':
+          description: Цель РЛС с ИД id не найдена.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/ans2/target/radar/{sourceId}/{id}/all:
+    get:
+      tags:
+        - Ans2Data
+      summary: Возвращает полную информацию о цели РЛС с ИД id.
+      parameters:
+        - name: sourceId
+          in: path
+          description: ИД источника данных РЛС.
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: ИД цели РЛС.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Полная информация о цели РЛС с ИД id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadarTargetInfoTrackLastUpdateWithDate'
+        '404':
+          description: Цель РЛС с ИД id не найдена.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/configuration/cameraShift/harvesting/NineCams:
+    get:
+      tags:
+        - CameraShiftHarvestingConfiguration
+      summary: Возвращает параметры сбора данных о сдвиге оптической схемы камеры.
+      responses:
+        '200':
+          description: Параметры получены.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CameraShiftHarvestingParameters'
+    put:
+      tags:
+        - CameraShiftHarvestingConfiguration
+      summary: Задаёт параметры сбора данных о сдвиге оптической схемы камеры.
+      requestBody:
+        description: Параметры сбора данных о сдвиге оптической схемы камеры.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/CameraShiftHarvestingParameters'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CameraShiftHarvestingParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CameraShiftHarvestingParameters'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CameraShiftHarvestingParameters'
+      responses:
+        '200':
+          description: Параметры заданы.
+  /api/v1/configuration/cameraShift/processing/NineCams:
+    get:
+      tags:
+        - CameraShiftProcessingConfiguration
+      summary: Возвращает параметры обработки кадров сервисом сдвига оптической схемы камеры.
+      responses:
+        '200':
+          description: Параметры получены.
+    put:
+      tags:
+        - CameraShiftProcessingConfiguration
+      summary: Задаёт параметры обработки кадров сервисом сдвига оптической схемы камеры.
+      requestBody:
+        description: Параметры обработки кадров сервисом сдвига оптической схемы камеры.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/NineCamsCameraShiftProcessingParameters'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NineCamsCameraShiftProcessingParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/NineCamsCameraShiftProcessingParameters'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/NineCamsCameraShiftProcessingParameters'
+      responses:
+        '200':
+          description: Параметры заданы.
+  /api/v1/сameraStatus/NineCams:
+    get:
+      tags:
+        - CameraStatus
+      summary: Получить информацию о статусе работы видеоисточников.
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/v1/dumps/detection:
+    get:
+      tags:
+        - DumpsDownload
+      summary: Возвращает даты дампов детекций.
+      parameters:
+        - name: start
+          in: query
+          description: Начальное время интервала.
+          schema:
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          description: Конечное время интервала.
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Возвращены даты дампов детекций.
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: date
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: date
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: date
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/dumps/NMEA:
+    get:
+      tags:
+        - DumpsDownload
+      summary: Возвращает даты дампов данных NMEA.
+      parameters:
+        - name: start
+          in: query
+          description: Начальное время интервала.
+          schema:
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          description: Конечное время интервала.
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Возвращены даты дампов данных NMEA.
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: date
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: date
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: date
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/dumps/panorama:
+    get:
+      tags:
+        - DumpsDownload
+      summary: Возвращает даты дампов панорамных изображений.
+      parameters:
+        - name: start
+          in: query
+          description: Начальное время интервала.
+          schema:
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          description: Конечное время интервала.
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Возвращены даты дампов панорамных изображений.
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: date
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: date
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: date
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/dumps/configuration:
+    get:
+      tags:
+        - DumpsDownload
+      summary: Возвращает даты дампов конфигураций.
+      parameters:
+        - name: start
+          in: query
+          description: Начальное время интервала.
+          schema:
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          description: Конечное время интервала.
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Возвращены даты дампов конфигураций.
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: date
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: date
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: date
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/dumps/archive/detection:
+    post:
+      tags:
+        - DumpsDownload
+      summary: Создаёт дамп детекций.
+      parameters:
+        - name: date
+          in: query
+          description: Дата записи дампа.
+          schema:
+            type: string
+            format: date
+        - name: start
+          in: query
+          description: Начальное время интервала.
+          schema:
+            type: string
+            format: date-span
+        - name: end
+          in: query
+          description: Конечное время интервала.
+          schema:
+            type: string
+            format: date-span
+      responses:
+        '200':
+          description: Дамп детекций был создан.
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+            application/json:
+              schema:
+                type: string
+                format: uuid
+            text/json:
+              schema:
+                type: string
+                format: uuid
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/dumps/archive/NMEA:
+    post:
+      tags:
+        - DumpsDownload
+      summary: Создаёт дамп данных NMEA.
+      parameters:
+        - name: date
+          in: query
+          description: Дата записи дампа.
+          schema:
+            type: string
+            format: date
+        - name: start
+          in: query
+          description: Начальное время интервала.
+          schema:
+            type: string
+            format: date-span
+        - name: end
+          in: query
+          description: Конечное время интервала.
+          schema:
+            type: string
+            format: date-span
+      responses:
+        '200':
+          description: Дамп данных NMEA был создан.
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+            application/json:
+              schema:
+                type: string
+                format: uuid
+            text/json:
+              schema:
+                type: string
+                format: uuid
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/dumps/archive/panorama:
+    post:
+      tags:
+        - DumpsDownload
+      summary: Создаёт дамп панорамных изображений.
+      parameters:
+        - name: date
+          in: query
+          description: Дата записи дампа.
+          schema:
+            type: string
+            format: date
+        - name: start
+          in: query
+          description: Начальное время интервала.
+          schema:
+            type: string
+            format: date-span
+        - name: end
+          in: query
+          description: Конечное время интервала.
+          schema:
+            type: string
+            format: date-span
+      responses:
+        '200':
+          description: Дамп панорамных изображений был создан.
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+            application/json:
+              schema:
+                type: string
+                format: uuid
+            text/json:
+              schema:
+                type: string
+                format: uuid
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/dumps/archive/configuration:
+    post:
+      tags:
+        - DumpsDownload
+      summary: Создаёт дамп конфигураций.
+      parameters:
+        - name: date
+          in: query
+          description: Дата записи дампа.
+          schema:
+            type: string
+            format: date
+        - name: start
+          in: query
+          description: Начальное время интервала.
+          schema:
+            type: string
+            format: date-span
+        - name: end
+          in: query
+          description: Конечное время интервала.
+          schema:
+            type: string
+            format: date-span
+      responses:
+        '200':
+          description: Дамп конфигурации был создан.
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+            application/json:
+              schema:
+                type: string
+                format: uuid
+            text/json:
+              schema:
+                type: string
+                format: uuid
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/dumps/archive/{id}/status:
+    get:
+      tags:
+        - DumpsDownload
+      summary: Возвращает статус архивации дампа.
+      parameters:
+        - name: id
+          in: path
+          description: Уникальный идентификатор архивного файла.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Статус архивации дампа получен.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ArchiveStatus'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchiveStatus'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ArchiveStatus'
+  /api/v1/dumps/archive/{id}/download:
+    get:
+      tags:
+        - DumpsDownload
+      summary: Скачивает дамп файлов.
+      parameters:
+        - name: id
+          in: path
+          description: Уникальный идентификатор архивного файла.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '206':
+          description: Дамп получен.
+        '404':
+          description: Дамп не найден.
+          content:
+            application/zip:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '409':
+          description: Дампа не готов к скачиванию.
+          content:
+            application/zip:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '416':
+          description: Ошибка чтения дампа.
+          content:
+            application/zip:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/harvester/start:
+    post:
+      tags:
+        - Harvester
+      summary: Запускает сбор данных.
+      parameters:
+        - name: markupToGenerate
+          in: query
+          description: "Количество JSON-разметки с результатами детекции, которые необходимо сохранить.\r\nПо-умолчанию генерируется бесконечное количество Json, до тех пор пока сбор данных не будет вручную выключен."
+          schema:
+            type: integer
+            format: int32
+        - name: saveEveryNMarkup
+          in: query
+          description: "Через какое количество кадров, необходимо производить сохранение разметки.\r\nПо-умолчанию сохраняется каждый обрабатываемый кадр,\r\nесли этот параметр по-умолчанию не переопределён в файле конфигурации."
+          schema:
+            type: integer
+            format: int32
+        - name: savingMarkupInterval
+          in: query
+          description: "Через какой временной интервал, необходимо производить сохранение разметки.\r\nПо-умолчанию сохраняется каждый обрабатываемый кадр,\r\nесли этот параметр по-умолчанию не переопределён в файле конфигурации."
+          schema:
+            type: string
+            format: date-span
+        - name: isSaveImage
+          in: query
+          description: Нужно ли сохранять кадры.
+          schema:
+            type: boolean
+            default: true
+        - name: frameToGenerate
+          in: query
+          description: "Количество кадров с результатами детекции, которые необходимо сохранить.\r\nПо-умолчанию генерируется бесконечное количество кадров, до тех пор пока сбор данных не будет вручную выключен,\r\nесли этот параметр по-умолчанию не переопределён в файле конфигурации."
+          schema:
+            type: integer
+            format: int32
+        - name: saveEveryNFrame
+          in: query
+          description: "Через какое количество кадров, необходимо производить сохранение изображений.\r\nПо-умолчанию сохраняется каждый обрабатываемый кадр,\r\nесли этот параметр по-умолчанию не переопределён в файле конфигурации."
+          schema:
+            type: integer
+            format: int32
+        - name: savingFrameInterval
+          in: query
+          description: "Через какой временной интервал, необходимо производить сохранение изображений.\r\nПо-умолчанию сохраняется каждый обрабатываемый кадр,\r\nесли этот параметр по-умолчанию не переопределён в файле конфигурации."
+          schema:
+            type: string
+            format: date-span
+        - name: quality
+          in: query
+          description: Качество сохраняемого изображения.
+          schema:
+            type: integer
+            format: int32
+            default: 90
+        - name: keepMaxDays
+          in: query
+          description: Максимальное количество суток хранения данных.
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - name: saveMarkup
+          in: query
+          description: Флаг сохранения разметки.
+          schema:
+            type: boolean
+        - name: savePath
+          in: query
+          description: Путь к директории, в которую будут сохранены изображения с разметкой.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Сбор данных запущен.
+        '400':
+          description: Сбор данных уже работает в данный момент.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Сервис сбора данных из ядра недоступен.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/harvester/stop:
+    post:
+      tags:
+        - Harvester
+      summary: Останавливает сбор данных.
+      responses:
+        '200':
+          description: Сбор данных остановлен.
+        '404':
+          description: Сервис сбора данных из ядра недоступен.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/harvester/schedule:
+    post:
+      tags:
+        - Harvester
+      summary: Планирует запуск сбор данных в определённое время.
+      parameters:
+        - name: startTime
+          in: query
+          description: Время, когда необходимо запустить сбор данных.
+          schema:
+            type: string
+            format: date-time
+        - name: endTime
+          in: query
+          description: "Время, когда необходимо остановить сбор данных.\r\nПо-умолчанию время остановки сбора данных не установлено."
+          schema:
+            type: string
+            format: date-time
+        - name: markupToGenerate
+          in: query
+          description: "Количество JSON-разметки с результатами детекции, которые необходимо сохранить.\r\nПо-умолчанию генерируется бесконечное количество Json, до тех пор пока сбор данных не будет вручную выключен,\r\nесли этот параметр по-умолчанию не переопределён в файле конфигурации."
+          schema:
+            type: integer
+            format: int32
+        - name: saveEveryNMarkup
+          in: query
+          description: "Через какое количество кадров, необходимо производить сохранение разметки.\r\nПо-умолчанию сохраняется каждый обрабатываемый кадр,\r\nесли этот параметр по-умолчанию не переопределён в файле конфигурации."
+          schema:
+            type: integer
+            format: int32
+        - name: savingMarkupInterval
+          in: query
+          description: "Через какой временной интервал, необходимо производить сохранение разметки.\r\nПо-умолчанию сохраняется каждый обрабатываемый кадр,\r\nесли этот параметр по-умолчанию не переопределён в файле конфигурации."
+          schema:
+            type: string
+            format: date-span
+        - name: isSaveImage
+          in: query
+          description: Нужно ли сохранять кадры.
+          schema:
+            type: boolean
+            default: true
+        - name: frameToGenerate
+          in: query
+          description: "Количество кадров с результатами детекции, которые необходимо сохранить.\r\nПо-умолчанию генерируется бесконечное количество кадров, до тех пор пока сбор данных не будет вручную выключен,\r\nесли этот параметр по-умолчанию не переопределён в файле конфигурации."
+          schema:
+            type: integer
+            format: int32
+        - name: saveEveryNFrame
+          in: query
+          description: "Через какое количество кадров, необходимо производить сохранение изображений.\r\nПо-умолчанию сохраняется каждый обрабатываемый кадр,\r\nесли этот параметр по-умолчанию не переопределён в файле конфигурации."
+          schema:
+            type: integer
+            format: int32
+        - name: savingFrameInterval
+          in: query
+          description: "Через какой временной интервал, необходимо производить сохранение изображений.\r\nПо-умолчанию сохраняется каждый обрабатываемый кадр,\r\nесли этот параметр по-умолчанию не переопределён в файле конфигурации."
+          schema:
+            type: string
+            format: date-span
+        - name: quality
+          in: query
+          description: Качество сохраняемого изображения.
+          schema:
+            type: integer
+            format: int32
+            default: 90
+        - name: keepMaxDays
+          in: query
+          description: Максимальное количество суток хранения данных.
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - name: saveMarkup
+          in: query
+          description: Флаг сохранения разметки.
+          schema:
+            type: boolean
+        - name: savePath
+          in: query
+          description: Путь к директории, в которую будут сохранены изображения с разметкой.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Сбор данных запланирован.
+        '400':
+          description: Сбор данных уже запланирован в данный момент.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Сервис сбора данных из ядра недоступен.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/harvester/cancelSchedule:
+    post:
+      tags:
+        - Harvester
+      summary: Отменяет запланированный запуск сбор данных в определённое время.
+      responses:
+        '200':
+          description: Запланированный сбор данных отменён.
+        '400':
+          description: Сбор данных уже запланирован и его невозможно уже отменить.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Сервис сбора данных из ядра недоступен.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/harvester/scheduleStatus:
+    get:
+      tags:
+        - Harvester
+      summary: Возвращает информацию о запланированном сборе данных.
+      responses:
+        '200':
+          description: Получена информация о запланированном сборе данных.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KernelHarvesterDelayStartParameters'
+        '404':
+          description: Сервис сбора данных из ядра недоступен.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/v1/harvester/harvesterStatus:
+    get:
+      tags:
+        - Harvester
+      summary: Возвращает информацию о выполняющемся сборе данных.
+      responses:
+        '200':
+          description: Получена информация о выполняющемся сборе данных.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KernelHarvesterStartParameters'
+        '404':
+          description: Сервис сбора данных из ядра недоступен.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/v1/harvester/default:
+    get:
+      tags:
+        - Harvester
+      summary: Возвращает параметры по-умолчанию для сбора данных, которые заданы в файле конфигурации.
+      responses:
+        '200':
+          description: Получена информация о параметрах по-умолчанию для сбора данных.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KernelHarvesterDefaultParameters'
+        '404':
+          description: Сервис сбора данных из ядра недоступен.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/v1/harvesting/panorama/quality:
+    get:
+      tags:
+        - HarvestingPanoramaImage
+      summary: Возвращает качество изображений.
+      responses:
+        '200':
+          description: Качество изображений отправлено.
+    put:
+      tags:
+        - HarvestingPanoramaImage
+      summary: Устанавливает качество изображений.
+      parameters:
+        - name: imageQuality
+          in: query
+          description: Качество изображений.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Качество изображений установлено.
+  /api/v1/harvesting/panorama/status:
+    get:
+      tags:
+        - HarvestingPanoramaImage
+      summary: Возвращает работает ли сохранение панорамных изображений.
+      responses:
+        '200':
+          description: Отправлен статус работает ли сохранение панорам.
+  /api/v1/harvesting/panorama/start:
+    post:
+      tags:
+        - HarvestingPanoramaImage
+      summary: Запускает сохранение панорамных изображений.
+      responses:
+        '200':
+          description: Сохранение панорамных изображений запущено.
+  /api/v1/harvesting/panorama/stop:
+    post:
+      tags:
+        - HarvestingPanoramaImage
+      summary: Останавливает сохранение панорамных изображений.
+      responses:
+        '200':
+          description: Сохранение панорамных изображений остановлено.
+  /health:
+    get:
+      tags:
+        - Health
+      summary: Проверить доступность сервиса.
+      responses:
+        '200':
+          description: Сервис доступен.
+        '404':
+          description: Сервис недоступен.
+    head:
+      tags:
+        - Health
+      summary: Проверить доступность сервиса.
+      responses:
+        '200':
+          description: Сервис доступен.
+        '404':
+          description: Сервис недоступен.
+  /api/v1/kernel/start:
+    get:
+      tags:
+        - Kernel
+      summary: Запустить обработку кадров ядром.
+      responses:
+        '200':
+          description: Success
+        '500':
+          description: Server Error
+  /api/v1/kernel/stop:
+    get:
+      tags:
+        - Kernel
+      summary: Остановить обработку кадров ядром.
+      responses:
+        '200':
+          description: Success
+        '500':
+          description: Server Error
+  /api/v1/kernel/restart:
+    get:
+      tags:
+        - Kernel
+      summary: Перезапустить ядро.
+      responses:
+        '200':
+          description: Success
+        '500':
+          description: Server Error
+  /api/v1/kernel/state:
+    get:
+      tags:
+        - Kernel
+      summary: Возвращает текущее состояние ядра.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '500':
+          description: Server Error
+  /api/v1/kernel/configuration:
+    get:
+      tags:
+        - Kernel
+      summary: Возвращает текущую конфигурацию ядра.
+      responses:
+        '200':
+          description: Success
+        '500':
+          description: Server Error
+  /api/v1/configuration/panoramaBuilder/NineCams:
+    get:
+      tags:
+        - PanoramaBuilderConfiguration
+      summary: Возвращает конфигурацию.
+      responses:
+        '200':
+          description: Конфигурация получена.
+    put:
+      tags:
+        - PanoramaBuilderConfiguration
+      summary: Задаёт конфигурацию.
+      requestBody:
+        description: Конфигурация.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/NineCamsPanoramaParameters'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NineCamsPanoramaParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/NineCamsPanoramaParameters'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/NineCamsPanoramaParameters'
+      responses:
+        '200':
+          description: Конфигурация задана.
+  /api/v1/panoramaImage/detections:
+    post:
+      tags:
+        - PanoramaImage
+      summary: Возвращает детекции вместе с панорамным изображением.
+      parameters:
+        - name: isEnabledSync
+          in: query
+          description: Включена ли синхронизация панорамы с детекциями.
+          schema:
+            type: boolean
+      requestBody:
+        description: Модель запроса.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PanoramaImageRequestModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PanoramaImageRequestModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PanoramaImageRequestModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PanoramaImageRequestModel'
+      responses:
+        '200':
+          description: Детекций вместе с панорамным изображением отправлены.
+        '204':
+          description: Панорамное изображение уже было отправлено ранее.
+        '404':
+          description: Панорамное изображение отсутствует.
+          content:
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/panoramaImage:
+    post:
+      tags:
+        - PanoramaImage
+      summary: Возвращает панорамное изображение.
+      requestBody:
+        description: Модель запроса.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PanoramaImageRequestModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PanoramaImageRequestModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PanoramaImageRequestModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PanoramaImageRequestModel'
+      responses:
+        '200':
+          description: Панорамное изображение отправлено.
+        '204':
+          description: Панорамное изображение уже было отправлено ранее.
+        '404':
+          description: Панорамное изображение отсутствует.
+          content:
+            image/jpeg:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/panoramaMetadata:
+    get:
+      tags:
+        - PanoramaMetadata
+      summary: Возвращает метаданные панорамного изображение.
+      responses:
+        '200':
+          description: Метаданные панорамного изображение отправлено.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/NineCamsPanoramaMetadata'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NineCamsPanoramaMetadata'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NineCamsPanoramaMetadata'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/panorama:
+    get:
+      tags:
+        - PanoramaStream
+      summary: Возвращает статус работы энкодера панорамы.
+      responses:
+        '200':
+          description: Статус работы энкодера панорамы получен.
+  /api/v1/panorama/start:
+    post:
+      tags:
+        - PanoramaStream
+      summary: Запускает энкодер панорамы.
+      responses:
+        '200':
+          description: Энкодер панорамы запущен.
+  /api/v1/panorama/stop:
+    post:
+      tags:
+        - PanoramaStream
+      summary: Останавливает энкодер панорамы.
+      responses:
+        '200':
+          description: Энкодер панорамы остановлен.
+  /api/v1/panorama/encodingParameters:
+    get:
+      tags:
+        - PanoramaStream
+      summary: Возвращает параметры энкодинга панорамы, заданные в конфигурационном файле.
+      responses:
+        '200':
+          description: Параметры энкодинга панорамы, заданные в конфигурационном файле, получены.
+    post:
+      tags:
+        - PanoramaStream
+      summary: Задаёт параметры энкодинга панорамы.
+      requestBody:
+        description: Параметры энкодинга панорамы.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/X264EncodingParameters'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/X264EncodingParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/X264EncodingParameters'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/X264EncodingParameters'
+      responses:
+        '200':
+          description: Параметры энкодинга панорамы применены.
+        '500':
+          description: Параметры панорамы не удалось применить.
+  /api/v1/panorama/stream.ts:
+    get:
+      tags:
+        - PanoramaStream
+      summary: Получает поток видео в контейнере MPEG TS со сшивкой панорамы.
+      responses:
+        '200':
+          description: Возвращён поток видео в контейнере MPEG TS с трансляцией с камеры.
+        '400':
+          description: Поток видео в контейнере MPEG TS не запущен.
+          content:
+            video/mp2t:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Внутренняя ошибка сервера.
+  /api/v1/configuration/playback/SingleCams/speed:
+    get:
+      tags:
+        - PlaybackControllerNineCam
+      summary: Получает скорость воспроизведения видео.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: number
+                format: double
+            application/json:
+              schema:
+                type: number
+                format: double
+            text/json:
+              schema:
+                type: number
+                format: double
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+    post:
+      tags:
+        - PlaybackControllerNineCam
+      summary: Устанавливает скорость воспроизведения видео.
+      parameters:
+        - name: rate
+          in: query
+          schema:
+            type: number
+            format: double
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /api/v1/configuration/playback/SingleCams/pause:
+    post:
+      tags:
+        - PlaybackControllerNineCam
+      summary: Приостанавливает воспроизведение видео.
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /api/v1/configuration/playback/SingleCams/resume:
+    post:
+      tags:
+        - PlaybackControllerNineCam
+      summary: Возобновляет воспроизведение видео.
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /api/v1/configuration/playback/SingleCams/seek:
+    post:
+      tags:
+        - PlaybackControllerNineCam
+      summary: Возобновляет воспроизведение видео.
+      parameters:
+        - name: timeSpan
+          in: query
+          schema:
+            type: string
+            format: date-span
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /api/v1/configuration/guides/NineCams/{type}:
+    get:
+      tags:
+        - SinglePathGuideConfiguration
+      summary: Возвращает заданные направляющие линии для левой камеры конверторного пути.
+      parameters:
+        - name: type
+          in: path
+          description: |-
+
+
+            CAM1 (Основная камера.)
+
+            CAM2
+
+            CAM3
+
+            CAM4
+
+            CAM5
+
+            CAM6
+
+            CAM7
+
+            CAM8
+
+            CAM9
+          required: true
+          schema:
+            $ref: '#/components/schemas/NineCams'
+          x-enumNames:
+            - Cam1
+            - Cam2
+            - Cam3
+            - Cam4
+            - Cam5
+            - Cam6
+            - Cam7
+            - Cam8
+            - Cam9
+          x-enumDescriptions:
+            - Основная камера.
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+      responses:
+        '200':
+          description: Направляющие линии возвращены.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/Guide'
+    put:
+      tags:
+        - SinglePathGuideConfiguration
+      summary: Обновляет или создаёт новую направляющую на левой камере конверторного пути.
+      parameters:
+        - name: type
+          in: path
+          description: |-
+
+
+            CAM1 (Основная камера.)
+
+            CAM2
+
+            CAM3
+
+            CAM4
+
+            CAM5
+
+            CAM6
+
+            CAM7
+
+            CAM8
+
+            CAM9
+          required: true
+          schema:
+            $ref: '#/components/schemas/NineCams'
+          x-enumNames:
+            - Cam1
+            - Cam2
+            - Cam3
+            - Cam4
+            - Cam5
+            - Cam6
+            - Cam7
+            - Cam8
+            - Cam9
+          x-enumDescriptions:
+            - Основная камера.
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+        - name: id
+          in: query
+          description: ИД направляющей для изменения или создания.
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: Направляющая, которая будет задана.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/Guide'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Guide'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Guide'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Guide'
+      responses:
+        '200':
+          description: Направляющая линия задана.
+    delete:
+      tags:
+        - SinglePathGuideConfiguration
+      parameters:
+        - name: type
+          in: path
+          description: |-
+
+
+            CAM1 (Основная камера.)
+
+            CAM2
+
+            CAM3
+
+            CAM4
+
+            CAM5
+
+            CAM6
+
+            CAM7
+
+            CAM8
+
+            CAM9
+          required: true
+          schema:
+            $ref: '#/components/schemas/NineCams'
+          x-enumNames:
+            - Cam1
+            - Cam2
+            - Cam3
+            - Cam4
+            - Cam5
+            - Cam6
+            - Cam7
+            - Cam8
+            - Cam9
+          x-enumDescriptions:
+            - Основная камера.
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+        - name: id
+          in: query
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+  /api/v1/configuration/neuronet/NineCams/{type}:
+    get:
+      tags:
+        - SinglePathNeuronetConfiguration
+      parameters:
+        - name: type
+          in: path
+          description: |-
+
+
+            CAM1 (Основная камера.)
+
+            CAM2
+
+            CAM3
+
+            CAM4
+
+            CAM5
+
+            CAM6
+
+            CAM7
+
+            CAM8
+
+            CAM9
+          required: true
+          schema:
+            $ref: '#/components/schemas/NineCams'
+          x-enumNames:
+            - Cam1
+            - Cam2
+            - Cam3
+            - Cam4
+            - Cam5
+            - Cam6
+            - Cam7
+            - Cam8
+            - Cam9
+          x-enumDescriptions:
+            - Основная камера.
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+      responses:
+        '200':
+          description: Success
+    put:
+      tags:
+        - SinglePathNeuronetConfiguration
+      parameters:
+        - name: type
+          in: path
+          description: |-
+
+
+            CAM1 (Основная камера.)
+
+            CAM2
+
+            CAM3
+
+            CAM4
+
+            CAM5
+
+            CAM6
+
+            CAM7
+
+            CAM8
+
+            CAM9
+          required: true
+          schema:
+            $ref: '#/components/schemas/NineCams'
+          x-enumNames:
+            - Cam1
+            - Cam2
+            - Cam3
+            - Cam4
+            - Cam5
+            - Cam6
+            - Cam7
+            - Cam8
+            - Cam9
+          x-enumDescriptions:
+            - Основная камера.
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ShipRecognitionPipelineParameters'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipRecognitionPipelineParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ShipRecognitionPipelineParameters'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ShipRecognitionPipelineParameters'
+      responses:
+        '200':
+          description: Success
+  /api/v1/configuration/videoSource/NineCams/{type}:
+    get:
+      tags:
+        - SinglePathVideoSourceConfiguration
+      parameters:
+        - name: type
+          in: path
+          description: |-
+
+
+            CAM1 (Основная камера.)
+
+            CAM2
+
+            CAM3
+
+            CAM4
+
+            CAM5
+
+            CAM6
+
+            CAM7
+
+            CAM8
+
+            CAM9
+          required: true
+          schema:
+            $ref: '#/components/schemas/NineCams'
+          x-enumNames:
+            - Cam1
+            - Cam2
+            - Cam3
+            - Cam4
+            - Cam5
+            - Cam6
+            - Cam7
+            - Cam8
+            - Cam9
+          x-enumDescriptions:
+            - Основная камера.
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+      responses:
+        '200':
+          description: Success
+    put:
+      tags:
+        - SinglePathVideoSourceConfiguration
+      parameters:
+        - name: type
+          in: path
+          description: |-
+
+
+            CAM1 (Основная камера.)
+
+            CAM2
+
+            CAM3
+
+            CAM4
+
+            CAM5
+
+            CAM6
+
+            CAM7
+
+            CAM8
+
+            CAM9
+          required: true
+          schema:
+            $ref: '#/components/schemas/NineCams'
+          x-enumNames:
+            - Cam1
+            - Cam2
+            - Cam3
+            - Cam4
+            - Cam5
+            - Cam6
+            - Cam7
+            - Cam8
+            - Cam9
+          x-enumDescriptions:
+            - Основная камера.
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+            - ''
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/BaseVideoChannelConfiguration'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BaseVideoChannelConfiguration'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BaseVideoChannelConfiguration'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/BaseVideoChannelConfiguration'
+      responses:
+        '200':
+          description: Success
+  /version:
+    get:
+      tags:
+        - Version
+      summary: Возвращает версию сервиса в виде строки.
+      responses:
+        '200':
+          description: Версия сервиса получена.
+        '404':
+          description: Версию сервиса получить не удалось.
+components:
+  schemas:
+    AlgLineF:
+      type: object
+      properties:
+        p1:
+          $ref: '#/components/schemas/AlgPoint2F'
+        p2:
+          $ref: '#/components/schemas/AlgPoint2F'
+      additionalProperties: false
+    AlgPoint2F:
+      type: object
+      properties:
+        x:
+          type: number
+          format: float
+        'y':
+          type: number
+          format: float
+      additionalProperties: false
+    ArchiveStatus:
+      enum:
+        - Processing
+        - Ready
+        - Failed
+        - Expired
+      type: string
+      description: |-
+        Представляет статус архивации данных.
+
+        Processing (Данные архивируются.)
+
+        Ready (Данные за архивированы.)
+
+        Failed (Ошибка архивации данных.)
+
+        Expired (Время хранения архива истекло.)
+      x-enumNames:
+        - Processing
+        - Ready
+        - Failed
+        - Expired
+      x-enumDescriptions:
+        - Данные архивируются.
+        - Данные за архивированы.
+        - Ошибка архивации данных.
+        - Время хранения архива истекло.
+    AttentionByGps:
+      type: object
+      properties:
+        Bearing:
+          type: number
+          description: Возвращает пеленг на цель в градусах.
+          format: float
+        Distance:
+          type: number
+          description: Возвращает или задаёт дальность до цели в милях.
+          format: float
+        Position:
+          $ref: '#/components/schemas/GpsPosition'
+      additionalProperties: false
+      description: Передаваемые данные события вместе с событием <seealso cref="P:ShipControl.Nmea.Aggregation.Ans2Nmea.IAns2AttentionEventsProvider.AttentionByGps" />.
+    BaseVideoChannelConfiguration:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Возвращает или задаёт GUID-канала.
+          format: uuid
+        Name:
+          type: string
+          description: Возвращает или задаёт наименование видеоканала.
+          nullable: true
+        IsOptional:
+          type: boolean
+          description: "Возвращает или задаёт является ли данная камера не обязательной для обработки,\r\nто есть если она станет недоступной, то обработка ядром продолжится."
+        VideoSourceParameters:
+          $ref: '#/components/schemas/ICurrentFrameProviderPolymorphicParameters'
+      additionalProperties: false
+      description: Базовая конфигурация видеоисточника.
+    BasicTargetData:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: ИД цели.
+          nullable: true
+        SourceType:
+          $ref: '#/components/schemas/TargetSourceType'
+        SourceId:
+          type: string
+          description: ИД источника данных.
+          nullable: true
+        Bearing:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        Distance:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        SpeedOverGround:
+          $ref: '#/components/schemas/VectorTrackLastUpdateWithDate'
+        ShipType:
+          $ref: '#/components/schemas/ShipTypeTrackLastUpdateWithDate'
+        Label:
+          $ref: '#/components/schemas/StringTrackLastUpdateWithDate'
+      additionalProperties: false
+      description: Содержит базовыые данные о цели.
+    BasicTargetDataTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          $ref: '#/components/schemas/BasicTargetData'
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    ByteSize:
+      type: object
+      properties:
+        Bits:
+          type: integer
+          format: int64
+        Bytes:
+          type: number
+          format: double
+        KibiBytes:
+          type: number
+          format: double
+          readOnly: true
+        MebiBytes:
+          type: number
+          format: double
+          readOnly: true
+        GibiBytes:
+          type: number
+          format: double
+          readOnly: true
+        TebiBytes:
+          type: number
+          format: double
+          readOnly: true
+        PebiBytes:
+          type: number
+          format: double
+          readOnly: true
+        KiloBytes:
+          type: number
+          format: double
+          readOnly: true
+        MegaBytes:
+          type: number
+          format: double
+          readOnly: true
+        GigaBytes:
+          type: number
+          format: double
+          readOnly: true
+        TeraBytes:
+          type: number
+          format: double
+          readOnly: true
+        PetaBytes:
+          type: number
+          format: double
+          readOnly: true
+        LargestWholeNumberBinarySymbol:
+          type: string
+          nullable: true
+          readOnly: true
+        LargestWholeNumberDecimalSymbol:
+          type: string
+          nullable: true
+          readOnly: true
+        LargestWholeNumberBinaryValue:
+          type: number
+          format: double
+          readOnly: true
+        LargestWholeNumberDecimalValue:
+          type: number
+          format: double
+          readOnly: true
+      additionalProperties: false
+    ByteSpeed:
+      type: object
+      properties:
+        ByteSize:
+          $ref: '#/components/schemas/ByteSize'
+        LargestWholeNumberBinarySymbol:
+          type: string
+          nullable: true
+          readOnly: true
+        LargestWholeNumberDecimalSymbol:
+          type: string
+          nullable: true
+          readOnly: true
+        LargestWholeNumberBinaryValue:
+          type: number
+          format: double
+          readOnly: true
+        LargestWholeNumberDecimalValue:
+          type: number
+          format: double
+          readOnly: true
+      additionalProperties: false
+    CameraMetadata:
+      type: object
+      properties:
+        sector:
+          $ref: '#/components/schemas/Sector'
+        image_position:
+          $ref: '#/components/schemas/Sector'
+      additionalProperties: false
+      description: Хранит сведения о том, как на панорамном изображение отображается конкретная камера.
+    CameraShiftHarvestingParameters:
+      type: object
+      properties:
+        SavePath:
+          type: string
+          description: Возвращает или задаёт путь, по которому будет сохраняться данные.
+          nullable: true
+        IsEnabled:
+          type: boolean
+          description: Возвращает или задаёт включено ли сохранение данных.
+        Image:
+          $ref: '#/components/schemas/ElementShiftHarvestingParameters'
+        Json:
+          $ref: '#/components/schemas/ElementShiftHarvestingParameters'
+      additionalProperties: false
+      description: Конфигурация сбора данных по результату контроля оптической схемы.
+    DiscreteCosineTransformAlgorithm:
+      enum:
+        - Auto
+        - FastInt
+        - Int
+        - MMX
+        - ALTIVEC
+        - FAAN
+      type: string
+      description: |-
+
+
+        Auto
+
+        FastInt
+
+        Int
+
+        MMX
+
+        ALTIVEC
+
+        FAAN
+      x-enumNames:
+        - Auto
+        - FastInt
+        - Int
+        - MMX
+        - ALTIVEC
+        - FAAN
+      x-enumDescriptions:
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+    ElementShiftHarvestingParameters:
+      type: object
+      properties:
+        SaveInterval:
+          type: string
+          description: Возвращает или задаёт интервал сохранения.
+          format: date-span
+          nullable: true
+        MinAbsoluteShift:
+          $ref: '#/components/schemas/Point'
+        IsEnabled:
+          type: boolean
+          description: Возвращает или задаёт включено ли сохранение данных.
+      additionalProperties: false
+      description: Параметры сохранения компонента данных о сдвиге.
+    GpsPosition:
+      type: object
+      properties:
+        Latitude:
+          $ref: '#/components/schemas/LatitudeValue'
+        Longitude:
+          $ref: '#/components/schemas/LongitudeValue'
+      additionalProperties: false
+      description: Представляет GPS-координаты.
+    GpsPositionTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          $ref: '#/components/schemas/GpsPosition'
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    GpsPositionWithAccuracy:
+      type: object
+      properties:
+        Position:
+          $ref: '#/components/schemas/GpsPosition'
+        A:
+          type: number
+          description: Возвращает большую полуось эллипса ошибок в метрах.
+          format: float
+        B:
+          type: number
+          description: Возвращает меньшую полуось эллипса ошибок в метрах.
+          format: float
+        T:
+          type: number
+          description: Возвращает направление большей полуоси эллипса ошибок в градусах.
+          format: float
+      additionalProperties: false
+      description: Значение координат GPS вместе с погрешностью элипсоида.
+    GpsPositionWithAccuracyTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          $ref: '#/components/schemas/GpsPositionWithAccuracy'
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    Guide:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Возвращает или задаёт имя направляющей линии.
+          nullable: true
+        description:
+          type: string
+          description: Возвращает или задаёт описание направляющей линии.
+          nullable: true
+        line:
+          $ref: '#/components/schemas/AlgLineF'
+        color:
+          type: string
+          description: Возвращает или задаёт цвет направляющей линии.
+      additionalProperties: false
+      description: Направляющая линия, которая фиксирует оптическую схему на камере.
+    H264Levels:
+      enum:
+        - '1.0'
+        - '1.1'
+        - '1.2'
+        - '1.3'
+        - '2.0'
+        - '2.1'
+        - '2.2'
+        - '3.0'
+        - '3.1'
+        - '3.2'
+        - '4.0'
+        - '4.1'
+        - '4.2'
+        - '5.0'
+        - '5.1'
+        - '5.2'
+        - '6.0'
+        - '6.1'
+        - '6.2'
+      type: string
+      description: |-
+        Уровни кодека H264.
+
+        1.0
+
+        1.1
+
+        1.2
+
+        1.3
+
+        2.0
+
+        2.1
+
+        2.2
+
+        3.0
+
+        3.1
+
+        3.2
+
+        4.0
+
+        4.1
+
+        4.2
+
+        5.0
+
+        5.1
+
+        5.2
+
+        6.0
+
+        6.1
+
+        6.2
+      x-enumNames:
+        - Level1
+        - Level11
+        - Level12
+        - Level13
+        - Level2
+        - Level21
+        - Level22
+        - Level3
+        - Level31
+        - Level32
+        - Level4
+        - Level41
+        - Level42
+        - Level5
+        - Level51
+        - Level52
+        - Level6
+        - Level61
+        - Level62
+      x-enumDescriptions:
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+    ICurrentFrameProviderPolymorphicParameters:
+      type: object
+      properties:
+        SelectedType:
+          type: string
+          nullable: true
+        Configuration:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    KernelHarvesterDefaultParameters:
+      type: object
+      properties:
+        AutoStart:
+          type: boolean
+          description: Возвращает или задаёт необходимость автоматического запуска сборка данных при старте программы.
+        DefaultStartParameters:
+          $ref: '#/components/schemas/KernelHarvesterDefaultStartParameters'
+      additionalProperties: false
+      description: Параметры по-умолчанию для сборка данных.
+    KernelHarvesterDefaultStartParameters:
+      type: object
+      properties:
+        SaveEveryNMarkup:
+          type: integer
+          description: Возвращает или задаёт интервал сохранения разметки.
+          format: int32
+          nullable: true
+        SaveMarkup:
+          type: boolean
+          description: Возвращает или задаёт флаг необходимости сохранения разметки.
+          nullable: true
+        SaveEveryNImages:
+          type: integer
+          description: Возвращает или задаёт интервал сохранения группы изображений.
+          format: int32
+          nullable: true
+        MarkupToGenerate:
+          type: integer
+          description: Возвращает или задаёт требуемое количество сохраняемых данных.
+          format: int32
+          nullable: true
+        ImageToGenerate:
+          type: integer
+          description: Возвращает или задаёт требуемое количество сохраняемых группы изображений.
+          format: int32
+          nullable: true
+        IntervalToGenerateMarkup:
+          type: string
+          description: Возвращает или задаёт временной интервал сохранения JSON.
+          format: date-span
+          nullable: true
+        IntervalToSaveImage:
+          type: string
+          description: Возвращает или задаёт временной интервал сохранения групп кадров.
+          format: date-span
+          nullable: true
+        SaveImages:
+          type: boolean
+          description: Возвращает или задаёт нужно ли сохранять картинки.
+        Quality:
+          type: integer
+          description: Возвращает или задаёт качество сохраняемого изображения.
+          format: int32
+        SavePath:
+          type: string
+          description: Возвращает или задаёт путь к директории, в которую будут сохранены изображения с разметкой.
+          nullable: true
+        KeepMaxDays:
+          type: integer
+          description: Максимальное количество суток для хранения данных.
+          format: int32
+      additionalProperties: false
+    KernelHarvesterDelayStartParameters:
+      type: object
+      properties:
+        StartTime:
+          type: string
+          description: Возвращает или задаёт время запуска сбора данных.
+          format: date-time
+        EndTime:
+          type: string
+          description: Возвращает или задаёт время остановки сбора данных.
+          format: date-time
+          nullable: true
+        Parameters:
+          $ref: '#/components/schemas/KernelHarvesterStartParameters'
+      additionalProperties: false
+      description: Параметры запланированной задачи.
+    KernelHarvesterStartParameters:
+      type: object
+      properties:
+        SavePath:
+          type: string
+          description: Возвращает или задаёт путь к директории, в которую будут сохранены изображения с разметкой.
+          nullable: true
+        SaveMarkup:
+          type: boolean
+          description: Возвращает или задаёт флаг необходимости сохранения разметки.
+          nullable: true
+        SaveEveryNMarkup:
+          type: integer
+          description: Возвращает или задаёт интервал сохранения разметки.
+          format: int32
+          nullable: true
+        SaveEveryNImages:
+          type: integer
+          description: Возвращает или задаёт интервал сохранения группы изображений.
+          format: int32
+          nullable: true
+        MarkupToGenerate:
+          type: integer
+          description: Возвращает или задаёт требуемое количество сохраняемых данных.
+          format: int32
+          nullable: true
+        ImageToGenerate:
+          type: integer
+          description: Возвращает или задаёт требуемое количество сохраняемых группы изображений.
+          format: int32
+          nullable: true
+        IntervalToGenerateMarkup:
+          type: string
+          description: Возвращает или задаёт временной интервал сохранения JSON.
+          format: date-span
+          nullable: true
+        IntervalToSaveImage:
+          type: string
+          description: Возвращает или задаёт временной интервал сохранения групп кадров.
+          format: date-span
+          nullable: true
+        SaveImages:
+          type: boolean
+          description: Возвращает или задаёт нужно ли сохранять картинки.
+        Quality:
+          type: integer
+          description: Возвращает или задаёт качество сохраняемого изображения.
+          format: int32
+        KeepMaxDays:
+          type: integer
+          description: Максимальное количество суток для хранения данных.
+          format: int32
+      additionalProperties: false
+      description: Параметры сбора данных.
+    Latitude:
+      enum:
+        - North
+        - South
+      type: string
+      description: |-
+        Широта.
+
+        North (Северная широта.)
+
+        South (Южная широта.)
+      x-enumNames:
+        - North
+        - South
+      x-enumDescriptions:
+        - Северная широта.
+        - Южная широта.
+    LatitudeValue:
+      type: object
+      properties:
+        Value:
+          type: number
+          description: Возвращает значение широты в градусах.
+          format: double
+        Latitude:
+          $ref: '#/components/schemas/Latitude'
+        Degrees:
+          type: integer
+          description: Возвращает целое количество градусов.
+          format: int32
+          readOnly: true
+        Minutes:
+          type: number
+          description: Возвращает дробное число минут.
+          format: double
+          readOnly: true
+      additionalProperties: false
+      description: Значение широты.
+    LightingCondition:
+      enum:
+        - Daylight
+        - Twilight
+        - Moonlight
+      type: string
+      description: |-
+        Условия освещённости.
+
+        Daylight (Дневной свет.)
+
+        Twilight (Сумерки.)
+
+        Moonlight (Ночь.)
+      x-enumNames:
+        - Daylight
+        - Twilight
+        - Moonlight
+      x-enumDescriptions:
+        - Дневной свет.
+        - Сумерки.
+        - Ночь.
+    LightingConditionTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          $ref: '#/components/schemas/LightingCondition'
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    Longitude:
+      enum:
+        - East
+        - West
+      type: string
+      description: |-
+        Долгота.
+
+        East (Восточная долгота.)
+
+        West (Западная долгота.)
+      x-enumNames:
+        - East
+        - West
+      x-enumDescriptions:
+        - Восточная долгота.
+        - Западная долгота.
+    LongitudeValue:
+      type: object
+      properties:
+        Value:
+          type: number
+          description: Возвращает значение долготы в градусах.
+          format: double
+        Longitude:
+          $ref: '#/components/schemas/Longitude'
+        Degrees:
+          type: integer
+          description: Возвращает целое количество градусов.
+          format: int32
+          readOnly: true
+        Minutes:
+          type: number
+          description: Возвращает дробное число минут.
+          format: double
+          readOnly: true
+      additionalProperties: false
+      description: Значение долготы.
+    NavigationStatus:
+      enum:
+        - UnderWayUsingEngine
+        - AtAnchor
+        - NotUnderCommand
+        - RestrictedManeuverability
+        - ConstrainedByHerDraught
+        - Moored
+        - Aground
+        - EngagedInFishing
+        - UnderWaySailing
+        - ReservedForFutureAmendmentOfNavigationalStatusForHsc
+        - ReservedForFutureAmendmentOfNavigationalStatusForWig
+        - ReservedForFutureUse1
+        - ReservedForFutureUse2
+        - ReservedForFutureUse3
+        - AisSartIsActive
+        - NotDefined
+      type: string
+      description: |-
+        Статус движения судна.
+
+        UnderWayUsingEngine (На судне используется двигатель.)
+
+        AtAnchor (Судно на якоре.)
+
+        NotUnderCommand (Судно без командования.)
+
+        RestrictedManeuverability (Маневрированность судна ограничена.)
+
+        ConstrainedByHerDraught (Движение судна ограничено его осадкой.)
+
+        Moored (Судно пришвартовано.)
+
+        Aground (Судно на мели.)
+
+        EngagedInFishing (Судно в процессе рыболовства.)
+
+        UnderWaySailing (Судно в процессе плавания.)
+
+        ReservedForFutureAmendmentOfNavigationalStatusForHsc (Резерв.)
+
+        ReservedForFutureAmendmentOfNavigationalStatusForWig (Резерв.)
+
+        ReservedForFutureUse1 (Резерв.)
+
+        ReservedForFutureUse2 (Резерв.)
+
+        ReservedForFutureUse3 (Резерв.)
+
+        AisSartIsActive (На судне активен AIS-SART.)
+
+        NotDefined (Статус неизвестен.)
+      x-enumNames:
+        - UnderWayUsingEngine
+        - AtAnchor
+        - NotUnderCommand
+        - RestrictedManeuverability
+        - ConstrainedByHerDraught
+        - Moored
+        - Aground
+        - EngagedInFishing
+        - UnderWaySailing
+        - ReservedForFutureAmendmentOfNavigationalStatusForHsc
+        - ReservedForFutureAmendmentOfNavigationalStatusForWig
+        - ReservedForFutureUse1
+        - ReservedForFutureUse2
+        - ReservedForFutureUse3
+        - AisSartIsActive
+        - NotDefined
+      x-enumDescriptions:
+        - На судне используется двигатель.
+        - Судно на якоре.
+        - Судно без командования.
+        - Маневрированность судна ограничена.
+        - Движение судна ограничено его осадкой.
+        - Судно пришвартовано.
+        - Судно на мели.
+        - Судно в процессе рыболовства.
+        - Судно в процессе плавания.
+        - Резерв.
+        - Резерв.
+        - Резерв.
+        - Резерв.
+        - Резерв.
+        - На судне активен AIS-SART.
+        - Статус неизвестен.
+    NavigationStatusTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          $ref: '#/components/schemas/NavigationStatus'
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    NineCams:
+      enum:
+        - CAM1
+        - CAM2
+        - CAM3
+        - CAM4
+        - CAM5
+        - CAM6
+        - CAM7
+        - CAM8
+        - CAM9
+      type: string
+      description: |-
+        Типы обзоров для 9 камер.
+
+        CAM1 (Основная камера.)
+
+        CAM2
+
+        CAM3
+
+        CAM4
+
+        CAM5
+
+        CAM6
+
+        CAM7
+
+        CAM8
+
+        CAM9
+      x-enumNames:
+        - Cam1
+        - Cam2
+        - Cam3
+        - Cam4
+        - Cam5
+        - Cam6
+        - Cam7
+        - Cam8
+        - Cam9
+      x-enumDescriptions:
+        - Основная камера.
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+    NineCamsCameraShiftProcessingParameters:
+      type: object
+      properties:
+        SendInterval:
+          type: string
+          description: Возвращает или задаёт интервал отправки данных в сервис контроля оптической схемы.
+          format: date-span
+          nullable: true
+        IsEnabled:
+          type: boolean
+          description: Возвращает или задаёт включён или отключен ли сервис контроля оптической схемы.
+        IsCamerasUsed:
+          type: object
+          properties:
+            CAM1:
+              type: boolean
+            CAM2:
+              type: boolean
+            CAM3:
+              type: boolean
+            CAM4:
+              type: boolean
+            CAM5:
+              type: boolean
+            CAM6:
+              type: boolean
+            CAM7:
+              type: boolean
+            CAM8:
+              type: boolean
+            CAM9:
+              type: boolean
+          additionalProperties: false
+          description: Возвращает или задаёт используется ли камера в контроле оптической схемы.
+          nullable: true
+      additionalProperties: false
+      description: Параметры обработки кадров сервисом контроля оптической схемы.
+    NineCamsIPanoramaBuilderFactoryPolymorphicParameters:
+      type: object
+      properties:
+        SelectedType:
+          type: string
+          nullable: true
+        Configuration:
+          type: object
+          additionalProperties:
+            nullable: true
+          nullable: true
+      additionalProperties: false
+    NineCamsPanoramaMetadata:
+      type: object
+      properties:
+        viewing_angle:
+          $ref: '#/components/schemas/PanoramaViewingRange'
+        camera_metadata:
+          type: object
+          properties:
+            CAM1:
+              $ref: '#/components/schemas/CameraMetadata'
+            CAM2:
+              $ref: '#/components/schemas/CameraMetadata'
+            CAM3:
+              $ref: '#/components/schemas/CameraMetadata'
+            CAM4:
+              $ref: '#/components/schemas/CameraMetadata'
+            CAM5:
+              $ref: '#/components/schemas/CameraMetadata'
+            CAM6:
+              $ref: '#/components/schemas/CameraMetadata'
+            CAM7:
+              $ref: '#/components/schemas/CameraMetadata'
+            CAM8:
+              $ref: '#/components/schemas/CameraMetadata'
+            CAM9:
+              $ref: '#/components/schemas/CameraMetadata'
+          additionalProperties: false
+          description: Возвращает набор метаданных по каждой камере.
+          nullable: true
+        size:
+          $ref: '#/components/schemas/Size'
+      additionalProperties: false
+      description: Метаданные панорамного изображения.
+    NineCamsPanoramaParameters:
+      type: object
+      properties:
+        PanoramaEnabled:
+          type: boolean
+          description: Возвращает или задает нужно ли строить панораму.
+        Configuration:
+          $ref: '#/components/schemas/NineCamsIPanoramaBuilderFactoryPolymorphicParameters'
+      additionalProperties: false
+      description: Конфигурация алгоритма создания панорамного изображения.
+    OwnShipData:
+      type: object
+      properties:
+        Heading:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        RateOfTurn:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        Pitch:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        Roll:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        SpeedOverGroundVector:
+          $ref: '#/components/schemas/VectorTrackLastUpdateWithDate'
+        SpeedOverWater:
+          $ref: '#/components/schemas/Vector2TrackLastUpdateWithDate'
+        Gps:
+          $ref: '#/components/schemas/GpsPositionWithAccuracyTrackLastUpdateWithDate'
+        Dimensions:
+          $ref: '#/components/schemas/OwnShipDimensionsTrackLastUpdateWithDate'
+      additionalProperties: false
+      description: Хранит сведения об текущем судне.
+    OwnShipDataTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          $ref: '#/components/schemas/OwnShipData'
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    OwnShipDimensions:
+      type: object
+      properties:
+        Width:
+          type: number
+          description: Возвращает ширину судна в метрах.
+          format: float
+        Lenght:
+          type: number
+          description: Возвращает длину судна в метрах.
+          format: float
+        HorizontalShift:
+          type: number
+          description: Возвращает смещение относительно центра корпуса вдоль, метры, минус в корму.
+          format: float
+        VerticalShift:
+          type: number
+          description: Возвращает смещение относительно центра корпуса поперек, метры, минус к левому борту.
+          format: float
+      additionalProperties: false
+      description: Информация о габаритах судна и точки отчёта датчиков относительно него.
+    OwnShipDimensionsTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          $ref: '#/components/schemas/OwnShipDimensions'
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    PanoramaImageRequestModel:
+      type: object
+      properties:
+        Preset:
+          $ref: '#/components/schemas/PanoramaPreset'
+        PrevBuildTime:
+          type: string
+          description: Время предыдущего получения панорамы.
+          format: date-time
+          nullable: true
+      additionalProperties: false
+      description: Модель запроса для получения панорамного изображения.
+    PanoramaPreset:
+      type: object
+      properties:
+        rectangle:
+          $ref: '#/components/schemas/RectangleF'
+        size:
+          $ref: '#/components/schemas/Size'
+        quality:
+          type: integer
+          description: Возвращает или задаёт качество изображения.
+          format: int32
+          nullable: true
+      additionalProperties: false
+      description: Пресет панорамы.
+    PanoramaViewingRange:
+      type: object
+      properties:
+        start:
+          type: integer
+          description: Начало угла обзора.
+          format: int32
+        end:
+          type: integer
+          description: Конец угла обзора.
+          format: int32
+      additionalProperties: false
+      description: Диапазон начала и конца угла обзора панорамы в градусах.
+    Point:
+      type: object
+      properties:
+        X:
+          type: integer
+          format: int32
+        'Y':
+          type: integer
+          format: int32
+        IsEmpty:
+          type: boolean
+          readOnly: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        Type:
+          type: string
+          nullable: true
+        Title:
+          type: string
+          nullable: true
+        Status:
+          type: integer
+          format: int32
+          nullable: true
+        Detail:
+          type: string
+          nullable: true
+        Instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    RadarTargetInfo:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Возвращает уникальный идентификатор отождествленной цели.
+          nullable: true
+        SpeedOverGround:
+          $ref: '#/components/schemas/VectorTrackLastUpdateWithDate'
+        Gps:
+          $ref: '#/components/schemas/GpsPositionWithAccuracyTrackLastUpdateWithDate'
+        Bearing:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        Distance:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        Label:
+          $ref: '#/components/schemas/StringTrackLastUpdateWithDate'
+      additionalProperties: false
+      description: Содержит информацию об отслеживаемой радарной цели.
+    RadarTargetInfoTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          $ref: '#/components/schemas/RadarTargetInfo'
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    RectangleF:
+      type: object
+      properties:
+        x:
+          type: number
+          format: float
+        'y':
+          type: number
+          format: float
+        width:
+          type: number
+          format: float
+        height:
+          type: number
+          format: float
+      additionalProperties: false
+    Sector:
+      type: object
+      properties:
+        start:
+          type: number
+          description: Возвращает начало сектора.
+          format: float
+        end:
+          type: number
+          description: Возвращает конец сектора.
+          format: float
+      additionalProperties: false
+      description: Представляет сектор.
+    ShipDetectorParameters:
+      type: object
+      properties:
+        Threshold:
+          type: number
+          description: Возвращает или задаёт порог распознавания объектов для детектора кораблей.
+          format: float
+        NmsThreshold:
+          type: number
+          description: Возвращает или задаёт порог, который указывает насколько близки должны быть детекции, чтобы объединять их в одну.
+          format: float
+        SizeRangeFiltering:
+          $ref: '#/components/schemas/SizeRangeFilteringParameters'
+      additionalProperties: false
+      description: Параметры детектора кораблей.
+    ShipRecognitionPipelineParameters:
+      type: object
+      properties:
+        FullZone:
+          $ref: '#/components/schemas/ShipDetectorParameters'
+        HorizonZone:
+          $ref: '#/components/schemas/ShipDetectorParameters'
+        UseHorizonZoneDetector:
+          type: boolean
+          description: Возвращает или задаёт нужно ли дополнительно распознавать объекты в области линии горизонта.
+        NmsThreshold:
+          type: number
+          description: Возвращает или задаёт порог, который указывает насколько близки должны быть детекции, чтобы объединять их в одну.
+          format: float
+        CombinedDetectionSizeRangeFiltering:
+          $ref: '#/components/schemas/SizeRangeFilteringParameters'
+        NetworkSetName:
+          type: string
+          description: Возвращает или задаёт имя набора сетей, который будет использоваться для распознавания.
+          nullable: true
+      additionalProperties: false
+      description: Параметры обработки для сервиса нейронных сетей>.
+    ShipType:
+      enum:
+        - NotAvailable
+        - WingInGround
+        - WingInGroundHazardousCategoryA
+        - WingInGroundHazardousCategoryB
+        - WingInGroundHazardousCategoryC
+        - WingInGroundHazardousCategoryD
+        - WingInGroundReserved1
+        - WingInGroundReserved2
+        - WingInGroundReserved3
+        - WingInGroundReserved4
+        - WingInGroundReserved5
+        - Fishing
+        - Towing
+        - TowingLarge
+        - DredgingOrUnderwaterOps
+        - DivingOps
+        - MilitaryOps
+        - Sailing
+        - PleasureCraft
+        - Reserved1
+        - Reserved2
+        - HighSpeedCraft
+        - HighSpeedCraftHazardousCategoryA
+        - HighSpeedCraftHazardousCategoryB
+        - HighSpeedCraftHazardousCategoryC
+        - HighSpeedCraftHazardousCategoryD
+        - HighSpeedCraftReserved1
+        - HighSpeedCraftReserved2
+        - HighSpeedCraftReserved3
+        - HighSpeedCraftReserved4
+        - HighSpeedCraftNoAdditionalInformation
+        - PilotVessel
+        - SearchAndRescueVessel
+        - Tug
+        - PortTender
+        - AntiPollutionEquipment
+        - LawEnforcement
+        - SpareLocalVessel1
+        - SpareLocalVessel2
+        - MedicalTransport
+        - NonCombatantShip
+        - Passenger
+        - PassengerHazardousCategoryA
+        - PassengerHazardousCategoryB
+        - PassengerHazardousCategoryC
+        - PassengerHazardousCategoryD
+        - PassengerReserved1
+        - PassengerReserved2
+        - PassengerReserved3
+        - PassengerReserved4
+        - PassengerNoAdditionalInformation
+        - Cargo
+        - CargoHazardousCategoryA
+        - CargoHazardousCategoryB
+        - CargoHazardousCategoryC
+        - CargoHazardousCategoryD
+        - CargoReserved1
+        - CargoReserved2
+        - CargoReserved3
+        - CargoReserved4
+        - CargoNoAdditionalInformation
+        - Tanker
+        - TankerHazardousCategoryA
+        - TankerHazardousCategoryB
+        - TankerHazardousCategoryC
+        - TankerHazardousCategoryD
+        - TankerReserved1
+        - TankerReserved2
+        - TankerReserved3
+        - TankerReserved4
+        - TankerNoAdditionalInformation
+        - OtherType
+        - OtherTypeHazardousCategoryA
+        - OtherTypeHazardousCategoryB
+        - OtherTypeHazardousCategoryC
+        - OtherTypeHazardousCategoryD
+        - OtherTypeReserved1
+        - OtherTypeReserved2
+        - OtherTypeReserved3
+        - OtherTypeReserved4
+        - OtherTypeNoAdditionalInformation
+      type: string
+      description: |-
+        Тип судна.
+
+        NotAvailable (Неизвестно.)
+
+        WingInGround (Парусное судно.)
+
+        WingInGroundHazardousCategoryA (Парусное судно категории A.)
+
+        WingInGroundHazardousCategoryB (Парусное судно категории B.)
+
+        WingInGroundHazardousCategoryC (Парусное судно категории C.)
+
+        WingInGroundHazardousCategoryD (Парусное судно категории D.)
+
+        WingInGroundReserved1 (Парусное судно.)
+
+        WingInGroundReserved2 (Парусное судно.)
+
+        WingInGroundReserved3 (Парусное судно.)
+
+        WingInGroundReserved4 (Парусное судно.)
+
+        WingInGroundReserved5 (Парусное судно.)
+
+        Fishing (Рыболовное судно.)
+
+        Towing (Буксир.)
+
+        TowingLarge (Большой буксир.)
+
+        DredgingOrUnderwaterOps (Судно для подводных работ.)
+
+        DivingOps (Судно для ныряния.)
+
+        MilitaryOps (Судно выполняющее военную функцию.)
+
+        Sailing (Судно для парусного спорта.)
+
+        PleasureCraft (Прогулочное судно.)
+
+        Reserved1 (Резерв.)
+
+        Reserved2 (Резерв.)
+
+        HighSpeedCraft (Высокоскоростное судно.)
+
+        HighSpeedCraftHazardousCategoryA (Высокоскоростное судно категории A.)
+
+        HighSpeedCraftHazardousCategoryB (Высокоскоростное судно категории B.)
+
+        HighSpeedCraftHazardousCategoryC (Высокоскоростное судно категории C.)
+
+        HighSpeedCraftHazardousCategoryD (Высокоскоростное судно категории D.)
+
+        HighSpeedCraftReserved1 (Высокоскоростное судно.)
+
+        HighSpeedCraftReserved2 (Высокоскоростное судно.)
+
+        HighSpeedCraftReserved3 (Высокоскоростное судно.)
+
+        HighSpeedCraftReserved4 (Высокоскоростное судно.)
+
+        HighSpeedCraftNoAdditionalInformation (Высокоскоростное судно без дополнительной информации.)
+
+        PilotVessel (Лоцманское судно.)
+
+        SearchAndRescueVessel (Поисково-спасательное судно.)
+
+        Tug (Буксир.)
+
+        PortTender (Портовый тендер.)
+
+        AntiPollutionEquipment (Оборудование для защиты от загрязнения.)
+
+        LawEnforcement (Правоохранительные органы.)
+
+        SpareLocalVessel1 (Запасное местное судно.)
+
+        SpareLocalVessel2 (Запасное местное судно.)
+
+        MedicalTransport (Медицинское судно.)
+
+        NonCombatantShip (Гражданское судно.)
+
+        Passenger (Пассажирское судно.)
+
+        PassengerHazardousCategoryA (Пассажирское судно категории A.)
+
+        PassengerHazardousCategoryB (Пассажирское судно категории B.)
+
+        PassengerHazardousCategoryC (Пассажирское судно категории C.)
+
+        PassengerHazardousCategoryD (Пассажирское судно категории D.)
+
+        PassengerReserved1 (Пассажирское судно.)
+
+        PassengerReserved2 (Пассажирское судно.)
+
+        PassengerReserved3 (Пассажирское судно.)
+
+        PassengerReserved4 (Пассажирское судно.)
+
+        PassengerNoAdditionalInformation (Пассажирское судно без дополнительной информации.)
+
+        Cargo (Грузовое судно.)
+
+        CargoHazardousCategoryA (Грузовое судно категории A.)
+
+        CargoHazardousCategoryB (Грузовое судно категории B.)
+
+        CargoHazardousCategoryC (Грузовое судно категории C.)
+
+        CargoHazardousCategoryD (Грузовое судно категории D.)
+
+        CargoReserved1 (Грузовое судно.)
+
+        CargoReserved2 (Грузовое судно.)
+
+        CargoReserved3 (Грузовое судно.)
+
+        CargoReserved4 (Грузовое судно.)
+
+        CargoNoAdditionalInformation (Грузовое судно без дополнительной информации.)
+
+        Tanker (Танкер.)
+
+        TankerHazardousCategoryA (Танкер категории A.)
+
+        TankerHazardousCategoryB (Танкер категории B.)
+
+        TankerHazardousCategoryC (Танкер категории C.)
+
+        TankerHazardousCategoryD (Танкер категории D.)
+
+        TankerReserved1 (Танкер.)
+
+        TankerReserved2 (Танкер.)
+
+        TankerReserved3 (Танкер.)
+
+        TankerReserved4 (Танкер.)
+
+        TankerNoAdditionalInformation (Танкер без дополнительной информации.)
+
+        OtherType (Прочее судно.)
+
+        OtherTypeHazardousCategoryA (Прочее судно категории A.)
+
+        OtherTypeHazardousCategoryB (Прочее судно категории B.)
+
+        OtherTypeHazardousCategoryC (Прочее судно категории C.)
+
+        OtherTypeHazardousCategoryD (Прочее судно категории D.)
+
+        OtherTypeReserved1 (Прочее судно.)
+
+        OtherTypeReserved2 (Прочее судно.)
+
+        OtherTypeReserved3 (Прочее судно.)
+
+        OtherTypeReserved4 (Прочее судно.)
+
+        OtherTypeNoAdditionalInformation (Прочее судно.)
+      x-enumNames:
+        - NotAvailable
+        - WingInGround
+        - WingInGroundHazardousCategoryA
+        - WingInGroundHazardousCategoryB
+        - WingInGroundHazardousCategoryC
+        - WingInGroundHazardousCategoryD
+        - WingInGroundReserved1
+        - WingInGroundReserved2
+        - WingInGroundReserved3
+        - WingInGroundReserved4
+        - WingInGroundReserved5
+        - Fishing
+        - Towing
+        - TowingLarge
+        - DredgingOrUnderwaterOps
+        - DivingOps
+        - MilitaryOps
+        - Sailing
+        - PleasureCraft
+        - Reserved1
+        - Reserved2
+        - HighSpeedCraft
+        - HighSpeedCraftHazardousCategoryA
+        - HighSpeedCraftHazardousCategoryB
+        - HighSpeedCraftHazardousCategoryC
+        - HighSpeedCraftHazardousCategoryD
+        - HighSpeedCraftReserved1
+        - HighSpeedCraftReserved2
+        - HighSpeedCraftReserved3
+        - HighSpeedCraftReserved4
+        - HighSpeedCraftNoAdditionalInformation
+        - PilotVessel
+        - SearchAndRescueVessel
+        - Tug
+        - PortTender
+        - AntiPollutionEquipment
+        - LawEnforcement
+        - SpareLocalVessel1
+        - SpareLocalVessel2
+        - MedicalTransport
+        - NonCombatantShip
+        - Passenger
+        - PassengerHazardousCategoryA
+        - PassengerHazardousCategoryB
+        - PassengerHazardousCategoryC
+        - PassengerHazardousCategoryD
+        - PassengerReserved1
+        - PassengerReserved2
+        - PassengerReserved3
+        - PassengerReserved4
+        - PassengerNoAdditionalInformation
+        - Cargo
+        - CargoHazardousCategoryA
+        - CargoHazardousCategoryB
+        - CargoHazardousCategoryC
+        - CargoHazardousCategoryD
+        - CargoReserved1
+        - CargoReserved2
+        - CargoReserved3
+        - CargoReserved4
+        - CargoNoAdditionalInformation
+        - Tanker
+        - TankerHazardousCategoryA
+        - TankerHazardousCategoryB
+        - TankerHazardousCategoryC
+        - TankerHazardousCategoryD
+        - TankerReserved1
+        - TankerReserved2
+        - TankerReserved3
+        - TankerReserved4
+        - TankerNoAdditionalInformation
+        - OtherType
+        - OtherTypeHazardousCategoryA
+        - OtherTypeHazardousCategoryB
+        - OtherTypeHazardousCategoryC
+        - OtherTypeHazardousCategoryD
+        - OtherTypeReserved1
+        - OtherTypeReserved2
+        - OtherTypeReserved3
+        - OtherTypeReserved4
+        - OtherTypeNoAdditionalInformation
+      x-enumDescriptions:
+        - Неизвестно.
+        - Парусное судно.
+        - Парусное судно категории A.
+        - Парусное судно категории B.
+        - Парусное судно категории C.
+        - Парусное судно категории D.
+        - Парусное судно.
+        - Парусное судно.
+        - Парусное судно.
+        - Парусное судно.
+        - Парусное судно.
+        - Рыболовное судно.
+        - Буксир.
+        - Большой буксир.
+        - Судно для подводных работ.
+        - Судно для ныряния.
+        - Судно выполняющее военную функцию.
+        - Судно для парусного спорта.
+        - Прогулочное судно.
+        - Резерв.
+        - Резерв.
+        - Высокоскоростное судно.
+        - Высокоскоростное судно категории A.
+        - Высокоскоростное судно категории B.
+        - Высокоскоростное судно категории C.
+        - Высокоскоростное судно категории D.
+        - Высокоскоростное судно.
+        - Высокоскоростное судно.
+        - Высокоскоростное судно.
+        - Высокоскоростное судно.
+        - Высокоскоростное судно без дополнительной информации.
+        - Лоцманское судно.
+        - Поисково-спасательное судно.
+        - Буксир.
+        - Портовый тендер.
+        - Оборудование для защиты от загрязнения.
+        - Правоохранительные органы.
+        - Запасное местное судно.
+        - Запасное местное судно.
+        - Медицинское судно.
+        - Гражданское судно.
+        - Пассажирское судно.
+        - Пассажирское судно категории A.
+        - Пассажирское судно категории B.
+        - Пассажирское судно категории C.
+        - Пассажирское судно категории D.
+        - Пассажирское судно.
+        - Пассажирское судно.
+        - Пассажирское судно.
+        - Пассажирское судно.
+        - Пассажирское судно без дополнительной информации.
+        - Грузовое судно.
+        - Грузовое судно категории A.
+        - Грузовое судно категории B.
+        - Грузовое судно категории C.
+        - Грузовое судно категории D.
+        - Грузовое судно.
+        - Грузовое судно.
+        - Грузовое судно.
+        - Грузовое судно.
+        - Грузовое судно без дополнительной информации.
+        - Танкер.
+        - Танкер категории A.
+        - Танкер категории B.
+        - Танкер категории C.
+        - Танкер категории D.
+        - Танкер.
+        - Танкер.
+        - Танкер.
+        - Танкер.
+        - Танкер без дополнительной информации.
+        - Прочее судно.
+        - Прочее судно категории A.
+        - Прочее судно категории B.
+        - Прочее судно категории C.
+        - Прочее судно категории D.
+        - Прочее судно.
+        - Прочее судно.
+        - Прочее судно.
+        - Прочее судно.
+        - Прочее судно.
+    ShipTypeSimplified:
+      enum:
+        - NotAvailable
+        - WingInGround
+        - Fishing
+        - Towing
+        - DredgingOrUnderwaterOps
+        - DivingOps
+        - MilitaryOps
+        - Sailing
+        - PleasureCraft
+        - HighSpeedCraft
+        - PilotVessel
+        - SearchAndRescueVessel
+        - Tug
+        - PortTender
+        - AntiPollutionEquipment
+        - LawEnforcement
+        - SpareLocalVessel
+        - MedicalTransport
+        - NonCombatantShip
+        - Passenger
+        - Cargo
+        - Tanker
+        - OtherType
+      type: string
+      description: |-
+        Упрошённый тип судна.
+
+        NotAvailable (Неизвестно.)
+
+        WingInGround (Парусное судно.)
+
+        Fishing (Рыболовное судно.)
+
+        Towing (Буксир.)
+
+        DredgingOrUnderwaterOps (Судно для подводных работ.)
+
+        DivingOps (Судно для ныряния.)
+
+        MilitaryOps (Судно выполняющее военную функцию.)
+
+        Sailing (Судно для парусного спорта.)
+
+        PleasureCraft (Прогулочное судно.)
+
+        HighSpeedCraft (Высокоскоростное судно.)
+
+        PilotVessel (Лоцманское судно.)
+
+        SearchAndRescueVessel (Поисково-спасательное судно.)
+
+        Tug (Буксир.)
+
+        PortTender (Портовый тендер.)
+
+        AntiPollutionEquipment (Оборудование для защиты от загрязнения.)
+
+        LawEnforcement (Правоохранительные органы.)
+
+        SpareLocalVessel (Запасное местное судно.)
+
+        MedicalTransport (Медицинское судно.)
+
+        NonCombatantShip (Гражданское судно.)
+
+        Passenger (Пассажирское судно.)
+
+        Cargo (Грузовое судно.)
+
+        Tanker (Танкер.)
+
+        OtherType (Прочее судно.)
+      x-enumNames:
+        - NotAvailable
+        - WingInGround
+        - Fishing
+        - Towing
+        - DredgingOrUnderwaterOps
+        - DivingOps
+        - MilitaryOps
+        - Sailing
+        - PleasureCraft
+        - HighSpeedCraft
+        - PilotVessel
+        - SearchAndRescueVessel
+        - Tug
+        - PortTender
+        - AntiPollutionEquipment
+        - LawEnforcement
+        - SpareLocalVessel
+        - MedicalTransport
+        - NonCombatantShip
+        - Passenger
+        - Cargo
+        - Tanker
+        - OtherType
+      x-enumDescriptions:
+        - Неизвестно.
+        - Парусное судно.
+        - Рыболовное судно.
+        - Буксир.
+        - Судно для подводных работ.
+        - Судно для ныряния.
+        - Судно выполняющее военную функцию.
+        - Судно для парусного спорта.
+        - Прогулочное судно.
+        - Высокоскоростное судно.
+        - Лоцманское судно.
+        - Поисково-спасательное судно.
+        - Буксир.
+        - Портовый тендер.
+        - Оборудование для защиты от загрязнения.
+        - Правоохранительные органы.
+        - Запасное местное судно.
+        - Медицинское судно.
+        - Гражданское судно.
+        - Пассажирское судно.
+        - Грузовое судно.
+        - Танкер.
+        - Прочее судно.
+    ShipTypeSimplifiedTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          $ref: '#/components/schemas/ShipTypeSimplified'
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    ShipTypeTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          $ref: '#/components/schemas/ShipType'
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    SingleRange:
+      type: object
+      properties:
+        Minimum:
+          type: number
+          description: Возвращает минимальное значение.
+          format: float
+          nullable: true
+        Maximum:
+          type: number
+          description: Возвращает максимальное значение.
+          format: float
+          nullable: true
+      additionalProperties: false
+      description: Представляет диапазон значений.
+    SingleTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          type: number
+          description: Возвращает или задаёт значение.
+          format: float
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    Size:
+      type: object
+      properties:
+        width:
+          type: integer
+          format: int32
+        height:
+          type: integer
+          format: int32
+      additionalProperties: false
+    SizeRangeFilteringParameters:
+      type: object
+      properties:
+        Width:
+          $ref: '#/components/schemas/SingleRange'
+        Height:
+          $ref: '#/components/schemas/SingleRange'
+        Diagonal:
+          $ref: '#/components/schemas/SingleRange'
+      additionalProperties: false
+      description: Параметры фильрации детекций по размеру объектов.
+    StandardCompliance:
+      enum:
+        - Normal
+        - Strict
+        - VeryStrict
+        - Experimental
+        - Unofficial
+      type: string
+      description: |-
+
+
+        Normal
+
+        Strict
+
+        VeryStrict
+
+        Experimental
+
+        Unofficial
+      x-enumNames:
+        - Normal
+        - Strict
+        - VeryStrict
+        - Experimental
+        - Unofficial
+      x-enumDescriptions:
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+    StringTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          type: string
+          description: Возвращает или задаёт значение.
+          nullable: true
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    TargetInfo:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Возвращает уникальный идентификатор отождествленной цели.
+          nullable: true
+        SpeedOverGround:
+          $ref: '#/components/schemas/VectorTrackLastUpdateWithDate'
+        Gps:
+          $ref: '#/components/schemas/GpsPositionWithAccuracyTrackLastUpdateWithDate'
+        Bearing:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        Distance:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        Imo:
+          $ref: '#/components/schemas/StringTrackLastUpdateWithDate'
+        Mmsi:
+          $ref: '#/components/schemas/StringTrackLastUpdateWithDate'
+        Name:
+          $ref: '#/components/schemas/StringTrackLastUpdateWithDate'
+        CallSign:
+          $ref: '#/components/schemas/StringTrackLastUpdateWithDate'
+        Destination:
+          $ref: '#/components/schemas/StringTrackLastUpdateWithDate'
+        NavigationStatus:
+          $ref: '#/components/schemas/NavigationStatusTrackLastUpdateWithDate'
+        ShipType:
+          $ref: '#/components/schemas/ShipTypeTrackLastUpdateWithDate'
+        ShipTypeSimplified:
+          $ref: '#/components/schemas/ShipTypeSimplifiedTrackLastUpdateWithDate'
+        Width:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        Length:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+      additionalProperties: false
+      description: Содержит информацию об отслеживаемой цели.
+    TargetInfoTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          $ref: '#/components/schemas/TargetInfo'
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    TargetSourceType:
+      enum:
+        - Ans2
+        - Ais
+        - Radar
+      type: string
+      description: |-
+
+
+        Ans2
+
+        Ais
+
+        Radar
+      x-enumNames:
+        - Ans2
+        - Ais
+        - Radar
+      x-enumDescriptions:
+        - ''
+        - ''
+        - ''
+    ThreadType:
+      enum:
+        - None
+        - Frame
+        - Slice
+        - Auto
+      type: string
+      description: |-
+
+
+        None
+
+        Frame
+
+        Slice
+
+        Auto
+      x-enumNames:
+        - None
+        - Frame
+        - Slice
+        - Auto
+      x-enumDescriptions:
+        - ''
+        - ''
+        - ''
+        - ''
+    Vector:
+      type: object
+      properties:
+        Speed:
+          type: number
+          description: Возвращает скорость в узлах.
+          format: float
+        Course:
+          type: number
+          description: Возвращает направление в градусах.
+          format: float
+      additionalProperties: false
+      description: Представляет векторную величину скорости.
+    Vector2:
+      type: object
+      properties:
+        X:
+          type: number
+          format: float
+        'Y':
+          type: number
+          format: float
+      additionalProperties: false
+    Vector2TrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          $ref: '#/components/schemas/Vector2'
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    VectorTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          $ref: '#/components/schemas/Vector'
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    WeatherCondition:
+      enum:
+        - Drizzle
+        - Rain
+        - Snow
+        - SnowGrains
+        - IcePellets
+        - SmallHail
+        - Hail
+        - RainAndShow
+        - SnowAndRain
+        - ShowShowers
+        - RainShowers
+        - HailShowers
+        - FreezingRain
+        - FreezingDrizzle
+        - ThunderstormWithRain
+        - ThunderstormWithHail
+        - ThunderstormWithSmallHail
+        - ThunderstormWithSnow
+        - Duststorm
+        - Sandstorm
+        - Fog
+        - FreezingFog
+        - FogInVicinity
+        - ShallowFog
+        - AerodromePartiallyCoveredByFog
+        - FogPatches
+        - Mist
+        - Haze
+        - Smoke
+        - LowDriftingSnow
+        - LowDriftingSand
+        - LowDriftingDust
+        - Dust
+        - BlowingSnow
+        - BlowingDust
+        - Squall
+        - IceCrystals
+        - Thunderstorm
+        - ThunderstormInVicinity
+        - VolcanicAsh
+      type: string
+      description: |-
+        Погодное явление.
+
+        Drizzle (Морось.)
+
+        Rain (Дождь.)
+
+        Snow (Снег.)
+
+        SnowGrains (Снежные зёрна.)
+
+        IcePellets (Ледяная крупа.)
+
+        SmallHail (Мелкий град или снежная крупа.)
+
+        Hail (Град.)
+
+        RainAndShow (Дождь со снегом.)
+
+        SnowAndRain (Снег с дождём.)
+
+        ShowShowers (Ливневый снег.)
+
+        RainShowers (Ливневый дождь.)
+
+        HailShowers (Град.)
+
+        FreezingRain (Переохлаждённый дождь.)
+
+        FreezingDrizzle (Переохлаждённая морось.)
+
+        ThunderstormWithRain (Гроза с дождём.)
+
+        ThunderstormWithHail (Гроза с градом.)
+
+        ThunderstormWithSmallHail (Гроза со снежной крупой.)
+
+        ThunderstormWithSnow (Гроза со снегом.)
+
+        Duststorm (Пыльная буря.)
+
+        Sandstorm (Песчаная буря.)
+
+        Fog (Туман (температура воздуха выше нуля).)
+
+        FreezingFog (Переохлаждённый туман (температура воздуха ниже нуля).)
+
+        FogInVicinity (Туман в окрестностях аэродрома (максимум 8 км), но не на самом аэродроме.)
+
+        ShallowFog (Поземный туман.)
+
+        AerodromePartiallyCoveredByFog (Аэродром частично покрыт туманом (основная видимость более километра).)
+
+        FogPatches (Туман местами (основная видимость менее километра).)
+
+        Mist (Дымка.)
+
+        Haze (Мгла.)
+
+        Smoke (Дым.)
+
+        LowDriftingSnow (Снежный позёмок.)
+
+        LowDriftingSand (Песчаный позёмок.)
+
+        LowDriftingDust (Пыльный позёмок.)
+
+        Dust (Пыль в воздухе.)
+
+        BlowingSnow (Снежная низовая метель.)
+
+        BlowingDust (Пыльная низовая метель.)
+
+        Squall (Шквал.)
+
+        IceCrystals (Ледяные иглы.)
+
+        Thunderstorm (Гроза (без осадков).)
+
+        ThunderstormInVicinity (Гроза в окрестности.)
+
+        VolcanicAsh (Вулканический пепел.)
+      x-enumNames:
+        - Drizzle
+        - Rain
+        - Snow
+        - SnowGrains
+        - IcePellets
+        - SmallHail
+        - Hail
+        - RainAndShow
+        - SnowAndRain
+        - ShowShowers
+        - RainShowers
+        - HailShowers
+        - FreezingRain
+        - FreezingDrizzle
+        - ThunderstormWithRain
+        - ThunderstormWithHail
+        - ThunderstormWithSmallHail
+        - ThunderstormWithSnow
+        - Duststorm
+        - Sandstorm
+        - Fog
+        - FreezingFog
+        - FogInVicinity
+        - ShallowFog
+        - AerodromePartiallyCoveredByFog
+        - FogPatches
+        - Mist
+        - Haze
+        - Smoke
+        - LowDriftingSnow
+        - LowDriftingSand
+        - LowDriftingDust
+        - Dust
+        - BlowingSnow
+        - BlowingDust
+        - Squall
+        - IceCrystals
+        - Thunderstorm
+        - ThunderstormInVicinity
+        - VolcanicAsh
+      x-enumDescriptions:
+        - Морось.
+        - Дождь.
+        - Снег.
+        - Снежные зёрна.
+        - Ледяная крупа.
+        - Мелкий град или снежная крупа.
+        - Град.
+        - Дождь со снегом.
+        - Снег с дождём.
+        - Ливневый снег.
+        - Ливневый дождь.
+        - Град.
+        - Переохлаждённый дождь.
+        - Переохлаждённая морось.
+        - Гроза с дождём.
+        - Гроза с градом.
+        - Гроза со снежной крупой.
+        - Гроза со снегом.
+        - Пыльная буря.
+        - Песчаная буря.
+        - Туман (температура воздуха выше нуля).
+        - Переохлаждённый туман (температура воздуха ниже нуля).
+        - Туман в окрестностях аэродрома (максимум 8 км), но не на самом аэродроме.
+        - Поземный туман.
+        - Аэродром частично покрыт туманом (основная видимость более километра).
+        - Туман местами (основная видимость менее километра).
+        - Дымка.
+        - Мгла.
+        - Дым.
+        - Снежный позёмок.
+        - Песчаный позёмок.
+        - Пыльный позёмок.
+        - Пыль в воздухе.
+        - Снежная низовая метель.
+        - Пыльная низовая метель.
+        - Шквал.
+        - Ледяные иглы.
+        - Гроза (без осадков).
+        - Гроза в окрестности.
+        - Вулканический пепел.
+    WeatherConditionIReadOnlyListTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeatherCondition'
+          description: Возвращает или задаёт значение.
+          nullable: true
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    WeatherInfo:
+      type: object
+      properties:
+        Temperature:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        Humidity:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        Pressure:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        LightingCondition:
+          $ref: '#/components/schemas/LightingConditionTrackLastUpdateWithDate'
+        WeatherConditions:
+          $ref: '#/components/schemas/WeatherConditionIReadOnlyListTrackLastUpdateWithDate'
+        VisibilityRange:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        TrueWind:
+          $ref: '#/components/schemas/VectorTrackLastUpdateWithDate'
+        RelativeWind:
+          $ref: '#/components/schemas/VectorTrackLastUpdateWithDate'
+        WaterTemperature:
+          $ref: '#/components/schemas/SingleTrackLastUpdateWithDate'
+        Flow:
+          $ref: '#/components/schemas/VectorTrackLastUpdateWithDate'
+      additionalProperties: false
+      description: Содержит сведения о погодных условиях.
+    WeatherInfoTrackLastUpdateWithDate:
+      type: object
+      properties:
+        LastUpdate:
+          type: string
+          description: Возвращает или задаёт дату и время последнего изменения ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: date-time
+        UpdateCount:
+          type: integer
+          description: Возвращает или задаёт количество изменений ShipControl.Nmea.Aggregation.TrackLastUpdateWithDate`1.Value.
+          format: int32
+        Value:
+          $ref: '#/components/schemas/WeatherInfo'
+        HasValue:
+          type: boolean
+          description: Возвращает содержит ли экземпляр установленное значение.
+          readOnly: true
+      additionalProperties: false
+      description: Отслеживает дату и время последнего изменения значения типа <typeparamref name="T" />.
+    Workarounds:
+      enum:
+        - None
+        - Autodetect
+        - XVID_ILACE
+        - UMP4
+        - NoPadding
+        - AMV
+        - QPELChroma
+        - StdQPEL
+        - Chroma2
+        - DirectBlocksize
+        - EDGE
+        - HPELChroma
+        - DCClip
+        - MS
+        - Truncated
+        - IEDGE
+      type: string
+      description: |-
+
+
+        None
+
+        Autodetect
+
+        XVID_ILACE
+
+        UMP4
+
+        NoPadding
+
+        AMV
+
+        QPELChroma
+
+        StdQPEL
+
+        Chroma2
+
+        DirectBlocksize
+
+        EDGE
+
+        HPELChroma
+
+        DCClip
+
+        MS
+
+        Truncated
+
+        IEDGE
+      x-enumNames:
+        - None
+        - Autodetect
+        - XVID_ILACE
+        - UMP4
+        - NoPadding
+        - AMV
+        - QPELChroma
+        - StdQPEL
+        - Chroma2
+        - DirectBlocksize
+        - EDGE
+        - HPELChroma
+        - DCClip
+        - MS
+        - Truncated
+        - IEDGE
+      x-enumDescriptions:
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+        - ''
+    X264BAdaptAlgorithmTypes:
+      enum:
+        - 'Off'
+        - Fast
+        - Optimal
+      type: string
+      description: |-
+        Выбирает алгоритм вставки или удаления B-кадров.
+
+        Off (Отключить адаптивный алгоритм необходимости использования B-кадров.)
+
+        Fast (Быстрый адаптивный алгоритм необходимости использования B-кадров.)
+
+        Optimal (Оптимальный адаптивный алгоритм необходимости использования B-кадров.)
+      x-enumNames:
+        - 'Off'
+        - Fast
+        - Optimal
+      x-enumDescriptions:
+        - Отключить адаптивный алгоритм необходимости использования B-кадров.
+        - Быстрый адаптивный алгоритм необходимости использования B-кадров.
+        - Оптимальный адаптивный алгоритм необходимости использования B-кадров.
+    X264BPiramids:
+      enum:
+        - None
+        - Strict
+        - Normal
+      type: string
+      description: "Управляет возможности ссылаться B-кадрам на другие B-кадры.\n\nNone (Запрещает использовать В-кадры как референсные.)\n\nStrict (Разрешают по 1-му референсному В-кадру на каждый minigop\r\n(соблюдает ограничения стандарта Blu-ray).)\n\nNormal (Разрешает множественное использование референсных В-каров на каждый minigop.)"
+      x-enumNames:
+        - None
+        - Strict
+        - Normal
+      x-enumDescriptions:
+        - Запрещает использовать В-кадры как референсные.
+        - "Разрешают по 1-му референсному В-кадру на каждый minigop\r\n(соблюдает ограничения стандарта Blu-ray)."
+        - Разрешает множественное использование референсных В-каров на каждый minigop.
+    X264Coders:
+      enum:
+        - CAVLC
+        - CABAC
+        - Default
+      type: string
+      description: "Задаёт тип кодера\n\nCAVLC (CAVLC (Контекстно-Адаптивное Неравномерное Кодирование).)\n\nCABAC (CABAC (Context-Adaptive Binary Arithmetic Coding / Контекстно-Адаптивное Двоичное Арифметическое Кодирование).\r\nДает сжатие, приблизительно, на 10-20% больше, по сравнению с CAVLC.\r\nCABAC использует больше процессорного времени для кодирования и декодирования.)\n\nDefault (Значение по-умолчанию.)"
+      x-enumNames:
+        - CAVLC
+        - CABAC
+        - Default
+      x-enumDescriptions:
+        - CAVLC (Контекстно-Адаптивное Неравномерное Кодирование).
+        - "CABAC (Context-Adaptive Binary Arithmetic Coding / Контекстно-Адаптивное Двоичное Арифметическое Кодирование).\r\nДает сжатие, приблизительно, на 10-20% больше, по сравнению с CAVLC.\r\nCABAC использует больше процессорного времени для кодирования и декодирования."
+        - Значение по-умолчанию.
+    X264DeblockParameters:
+      type: object
+      properties:
+        Alpha:
+          type: integer
+          description: 'Сила подавления блоков. Диапазон значений: -6 - 6.'
+          format: int32
+        Beta:
+          type: integer
+          description: 'Точность определения блоков. Диапазон значений: -6 - 6.'
+          format: int32
+        IsEnabled:
+          type: boolean
+          description: Определяет включён или отключен фильтр.
+      additionalProperties: false
+      description: Параметры алгоритма устранения блочности.
+    X264EncodingParameters:
+      type: object
+      properties:
+        Bitrate:
+          $ref: '#/components/schemas/ByteSpeed'
+        DiscreteCosineTransformAlgorithm:
+          $ref: '#/components/schemas/DiscreteCosineTransformAlgorithm'
+        GOPSize:
+          type: integer
+          description: Возвращает и устанавливает максимальный интервал между ключевыми/IDR кадрами.
+          format: int32
+          nullable: true
+        Level:
+          $ref: '#/components/schemas/H264Levels'
+        Profile:
+          $ref: '#/components/schemas/X264Profiles'
+        QuantizerMinimum:
+          type: integer
+          description: Возвращает и устанавливает минимальный уровень квантования, максимальное значение - 69.
+          format: int32
+          nullable: true
+        QuantizerMaximum:
+          type: integer
+          description: Возвращает и устанавливает максимальный уровень квантования, максимальное значение - 1024.
+          format: int32
+          nullable: true
+        MaximumQuantizerDifference:
+          type: integer
+          format: int32
+          nullable: true
+        ThreadType:
+          $ref: '#/components/schemas/ThreadType'
+        ThreadCount:
+          type: integer
+          description: Возвращает и устанавливает количество потоков.
+          format: int32
+          nullable: true
+        StandardCompliance:
+          $ref: '#/components/schemas/StandardCompliance'
+        Workarounds:
+          $ref: '#/components/schemas/Workarounds'
+        IFrameQuantizerFactor:
+          type: number
+          description: Возвращает или устанавливает соотношение QF между P и I-кадрами.
+          format: float
+          nullable: true
+        IFrameQuantizerOffset:
+          type: number
+          description: Возвращает или устанавливает разницу QF между P и I-кадрами.
+          format: float
+          nullable: true
+        BFrameQuantizerFactor:
+          type: number
+          description: Возвращает или устанавливает соотношение QF между P и B-кадрами.
+          format: float
+          nullable: true
+        BFrameQuantizerOffset:
+          type: number
+          description: Возвращает или устанавливает разницу QF между P и B-кадрами.
+          format: float
+          nullable: true
+        MaxBFrames:
+          type: integer
+          description: Возвращает или устанавливает максимальное количество B-кадров между другими типами кадров.
+          format: int32
+          nullable: true
+        QuantizerSmoothing:
+          type: number
+          description: Возвращает или устанавливает плавность изменения квантования в диапазоне от 0.0 до 1.0.
+          format: float
+          nullable: true
+        CountOfReferenceFrames:
+          type: integer
+          description: Возвращает или устанавливает количество опорных кадры для компенсации движения.
+          format: int32
+          nullable: true
+        QuantizerScaleCompression:
+          type: number
+          description: "Возвращает или устанавливает сжатие масштаба квантователя видео.\r\nЯвляется константой уравнения управления скоростью.\r\nРекомендуемый диапазон для rc_eq по умолчанию: 0.0-1.0.\r\nУказывает насколько энкодер будет менять значения квантования в зависимости от сложности сцены."
+          format: float
+          nullable: true
+        MotionEstimationRange:
+          type: integer
+          description: "Возвращает или устанавливает максимальный диапазон поиска оценки движения в субпиксельных единицах.\r\nЕсли 0, то нет ограничений."
+          format: int32
+          nullable: true
+        MotionEstimationSubpixelQuality:
+          type: integer
+          description: Возвращает или устанавливает субпиксельное качество при поиске оценки движения.
+          format: int32
+          nullable: true
+        Tune:
+          $ref: '#/components/schemas/X264Tunes'
+        Preset:
+          $ref: '#/components/schemas/X264Presets'
+        QualityOfConstantRateMode:
+          type: number
+          description: Возвращает или устанавливает качество при использование режима контроля битрейта CRF.
+          format: float
+          nullable: true
+        MaxQualityOfConstantRateMode:
+          type: number
+          description: "Возвращает или устанавливает максимальное качество при использование режима контроля битрейта CRF,\r\nчто не позволяет VBV понизить ниже этого порога."
+          format: float
+          nullable: true
+        ConstantQuantizer:
+          type: integer
+          description: Возвращает или устанавливает качество при использование режима контроля битрейта CQP.
+          format: int32
+          nullable: true
+        SceneCut:
+          type: integer
+          description: Возвращает или устанавливает насколько часто будут использоваться дополнительные I-кадры.
+          format: int32
+          nullable: true
+        UseIntraRefresh:
+          type: boolean
+          description: Возвращает или устанавливает запрещено ли использовать IDR-кадры.
+          nullable: true
+        BAdaptAlgorithm:
+          $ref: '#/components/schemas/X264BAdaptAlgorithmTypes'
+        BBias:
+          type: integer
+          description: Возвращает или задаёт агрессивность замещение P-кадров B-кадрами.
+          format: int32
+          nullable: true
+        BPiramid:
+          $ref: '#/components/schemas/X264BPiramids'
+        UseOpenGOP:
+          type: boolean
+          description: Возвращает или задаёт возможность использование подхода Open-GOP.
+          nullable: true
+        Coder:
+          $ref: '#/components/schemas/X264Coders'
+        Lookahead:
+          type: integer
+          description: Возвращает или задаёт сколько кадров X264 будет буферизировать для более точного управления битрейтом.
+          format: int32
+          nullable: true
+        Deblock:
+          $ref: '#/components/schemas/X264DeblockParameters'
+      additionalProperties: false
+      description: Параметры для ShipControl.Video.VideoEncoding.X264EncodingCodecContextProvider.
+    X264Presets:
+      enum:
+        - UltraFast
+        - SuperFast
+        - VeryFast
+        - Faster
+        - Fast
+        - Medium
+        - Slow
+        - Slower
+        - VerySlow
+        - Placebo
+      type: string
+      description: "Готовые пресеты для кодирования.\r\nПресет - это заранее подготовленный комплект максимально соответствующих поставленной задаче\r\nпараметров, которые непосредственно отражаются на скорости кодирования и качественных\r\nхарактеристиках (качество видео напрямую зависит от скорости кодирования).\r\nВ процессе кодирования предпочтение стоит отдавать готовым пресетам.\r\nЧем быстрее пресет - тем ниже качество.\n\nUltraFast (Ультра-быстрый режим. Устанавливает параметры:\r\n--no-8x8dct --aq-mode 0 --b-adapt 0 --bframes 0 --no-cabac --no-deblock --no-mbtree\r\n--me dia --no-mixed-refs --partitions none --rc-lookahead 0 --ref 1 --scenecut 0 --subme 0\r\n--trellis 0 --no-weightb --weightp 0)\n\nSuperFast (Cверхбыстрый режим. Устанавливает параметры:\r\n--no-mbtree --me dia --no-mixed-refs --partitions i8x8,i4x4 --rc-lookahead 0 --ref 1\r\n--subme 1 --trellis 0 --weightp 1)\n\nVeryFast (Очень быстрый режим. Устанавливает параметры:\r\n--no-mixed-refs --rc-lookahead 10 --ref 1 --subme 2 --trellis 0 --weightp 1)\n\nFaster (Более быстрый режим. Устанавливает параметры:\r\n--no-mixed-refs --rc-lookahead 20 --ref 2 --subme 4 --weightp 1)\n\nFast (Быстрый режим. Устанавливает параметры:\r\n--rc-lookahead 30 --ref 2 --subme 6 --weightp 1)\n\nMedium (Нормальный режим. Устанавливает параметры по-умолчанию.)\n\nSlow (Медленный режим. Устанавливает параметры:\r\n--b-adapt 2 --direct auto --me umh --rc-lookahead 50 --ref 5 --subme 8)\n\nSlower (Более медленный режим. Устанавливает параметры:\r\n--b-adapt 2 --direct auto --me umh --partitions all --rc-lookahead 60 --ref 8\r\n--subme 9 --trellis 2)\n\nVerySlow (Очень медленный режим. Устанавливает параметры:\r\n--b-adapt 2 --bframes 8 --direct auto --me umh --merange 24 --partitions all\r\n--ref 16 --subme 10 --trellis 2 --rc-lookahead 60)\n\nPlacebo (Максимально медленный режим. Устанавливает параметры:\r\n--bframes 16 --b-adapt 2 --direct auto --slow-firstpass --no-fast-pskip\r\n--me tesa --merange 24 --partitions all --rc-lookahead 60 --ref 16 --subme 11 --trellis 2)"
+      x-enumNames:
+        - UltraFast
+        - SuperFast
+        - VeryFast
+        - Faster
+        - Fast
+        - Medium
+        - Slow
+        - Slower
+        - VerySlow
+        - Placebo
+      x-enumDescriptions:
+        - "Ультра-быстрый режим. Устанавливает параметры:\r\n--no-8x8dct --aq-mode 0 --b-adapt 0 --bframes 0 --no-cabac --no-deblock --no-mbtree\r\n--me dia --no-mixed-refs --partitions none --rc-lookahead 0 --ref 1 --scenecut 0 --subme 0\r\n--trellis 0 --no-weightb --weightp 0"
+        - "Cверхбыстрый режим. Устанавливает параметры:\r\n--no-mbtree --me dia --no-mixed-refs --partitions i8x8,i4x4 --rc-lookahead 0 --ref 1\r\n--subme 1 --trellis 0 --weightp 1"
+        - "Очень быстрый режим. Устанавливает параметры:\r\n--no-mixed-refs --rc-lookahead 10 --ref 1 --subme 2 --trellis 0 --weightp 1"
+        - "Более быстрый режим. Устанавливает параметры:\r\n--no-mixed-refs --rc-lookahead 20 --ref 2 --subme 4 --weightp 1"
+        - "Быстрый режим. Устанавливает параметры:\r\n--rc-lookahead 30 --ref 2 --subme 6 --weightp 1"
+        - Нормальный режим. Устанавливает параметры по-умолчанию.
+        - "Медленный режим. Устанавливает параметры:\r\n--b-adapt 2 --direct auto --me umh --rc-lookahead 50 --ref 5 --subme 8"
+        - "Более медленный режим. Устанавливает параметры:\r\n--b-adapt 2 --direct auto --me umh --partitions all --rc-lookahead 60 --ref 8\r\n--subme 9 --trellis 2"
+        - "Очень медленный режим. Устанавливает параметры:\r\n--b-adapt 2 --bframes 8 --direct auto --me umh --merange 24 --partitions all\r\n--ref 16 --subme 10 --trellis 2 --rc-lookahead 60"
+        - "Максимально медленный режим. Устанавливает параметры:\r\n--bframes 16 --b-adapt 2 --direct auto --slow-firstpass --no-fast-pskip\r\n--me tesa --merange 24 --partitions all --rc-lookahead 60 --ref 16 --subme 11 --trellis 2"
+    X264Profiles:
+      enum:
+        - Baseline
+        - Main
+        - High
+        - High10
+        - High422
+        - High444
+      type: string
+      description: |-
+        Профили кодека H264, которые поддерживает библиотека libx264.
+
+        Baseline (--no-8x8dct --bframes 0 --no-cabac --cqm flat --weightp 0. С потерей качества. Без интерлейсинга.)
+
+        Main (--no-8x8dct --cqm flat. С потерей качества.)
+
+        High (Нет ограничений. С потерей качества.)
+
+        High10 (Тоже что и high, но с поддержкой глубины изображения в 10bit. С потерей качества.)
+
+        High422 (Тоже что и high10, плюс поддержка 4:2:0/4:2:2 сабсемплинга. С потерей качества.)
+
+        High444 (Тоже что и high10, плюс поддержка 4:2:0/4:2:2/4:4:4 сабсемплинг. Возможен режим без потерь.)
+      x-enumNames:
+        - Baseline
+        - Main
+        - High
+        - High10
+        - High422
+        - High444
+      x-enumDescriptions:
+        - '--no-8x8dct --bframes 0 --no-cabac --cqm flat --weightp 0. С потерей качества. Без интерлейсинга.'
+        - '--no-8x8dct --cqm flat. С потерей качества.'
+        - Нет ограничений. С потерей качества.
+        - Тоже что и high, но с поддержкой глубины изображения в 10bit. С потерей качества.
+        - Тоже что и high10, плюс поддержка 4:2:0/4:2:2 сабсемплинга. С потерей качества.
+        - Тоже что и high10, плюс поддержка 4:2:0/4:2:2/4:4:4 сабсемплинг. Возможен режим без потерь.
+    X264Tunes:
+      enum:
+        - Film
+        - Animation
+        - Grain
+        - StillImage
+        - Psnr
+        - Ssim
+        - FastDecode
+        - ZeroLatency
+      type: string
+      description: "Задаёт набор предустановок для энкодера X264 в зависимости от вида видео.\r\nВозможно использовать несколько не противоречивающих друг другу предустановок.\r\nВзаимоисключающими установками являются film, animation, grain, stillimage, psnr и ssim.\n\nFilm (Для фильмов. Задаёт параметры:\r\n--deblock -1:-1 --psy-rd не задано:0.15)\n\nAnimation (Для мультипликации. Задаёт параметры:\r\n--ref (удваивает --ref если оно больше 1) --deblock 1:1 --psy-rd 0.4:не задано\r\n--aq-strength 0.6 --bframes (стандартный --bframes + 2))\n\nGrain (Для зернистого изображения с повышенной детализацией. Задаёт параметры:\r\n--aq-strength 0.5 --no-dct-decimate --deadzone-inter 6 --deadzone-intra 6 --deblock -2:-2\r\n--ipratio 1.1 --pbratio 1.1 --psy-rd :0.25 --qcomp 0.8)\n\nStillImage (Для графики:\r\n--aq-strength 1.2 --deblock -3:-3 --psy-rd 2.0:0.7)\n\nPsnr (--aq-mode 0--no-psy)\n\nSsim (--aq-mode 2 --no-psy)\n\nFastDecode (Для быстрого декодирования содержания:\r\n--no-deblock --no-cabac --no-weightb --weightp 0)\n\nZeroLatency (Для потокового видео:\r\n--bframes 0 --force-cfr --no-mbtree --sync-lookahead 0 --sliced-threads --rc-lookahead 0)"
+      x-enumNames:
+        - Film
+        - Animation
+        - Grain
+        - StillImage
+        - Psnr
+        - Ssim
+        - FastDecode
+        - ZeroLatency
+      x-enumDescriptions:
+        - "Для фильмов. Задаёт параметры:\r\n--deblock -1:-1 --psy-rd не задано:0.15"
+        - "Для мультипликации. Задаёт параметры:\r\n--ref (удваивает --ref если оно больше 1) --deblock 1:1 --psy-rd 0.4:не задано\r\n--aq-strength 0.6 --bframes (стандартный --bframes + 2)"
+        - "Для зернистого изображения с повышенной детализацией. Задаёт параметры:\r\n--aq-strength 0.5 --no-dct-decimate --deadzone-inter 6 --deadzone-intra 6 --deblock -2:-2\r\n--ipratio 1.1 --pbratio 1.1 --psy-rd :0.25 --qcomp 0.8"
+        - "Для графики:\r\n--aq-strength 1.2 --deblock -3:-3 --psy-rd 2.0:0.7"
+        - '--aq-mode 0--no-psy'
+        - '--aq-mode 2 --no-psy'
+        - "Для быстрого декодирования содержания:\r\n--no-deblock --no-cabac --no-weightb --weightp 0"
+        - "Для потокового видео:\r\n--bframes 0 --force-cfr --no-mbtree --sync-lookahead 0 --sliced-threads --rc-lookahead 0"
+tags:
+  - name: Health
+    description: Контроллер проверки текущего состояния сервиса.
+  - name: Version
+    description: Контроллер, который позволяет узнать версию сервиса.
+  - name: Ans2Data
+    description: Контроллер для получения данных из системы АНС2.
+  - name: CameraStatus
+    description: Контроллер информации о статусе работы видеоисточников.
+  - name: DumpsDownload
+    description: Контроллер ядра обработки кадров.
+  - name: Harvester
+    description: Контроллер для сбора данных о работе алгоритмов.
+  - name: HarvestingPanoramaImage
+    description: Контроллер сохранения панорамных изображений в дампы.
+  - name: Kernel
+    description: Контроллер ядра обработки кадров.
+  - name: PanoramaImage
+    description: Контроллер панорамного изображения.
+  - name: PanoramaMetadata
+    description: Контроллер метаданных панорамного изображения.
+  - name: CameraShiftHarvestingConfiguration
+    description: Позволяет получать или изменять конфигурацию сбора данных о сдвиге оптической схемы камеры.
+  - name: CameraShiftProcessingConfiguration
+    description: Позволяет получать или изменять конфигурацию обработки кадров сервисом сдвига оптической схемы камеры.
+  - name: PanoramaBuilderConfiguration
+    description: Позволяет получать или изменять конфигурацию построения панорамного изображения.
+  - name: SinglePathVideoSourceConfiguration
+    description: Контроллер, возвразающий и задающий конфигурацию ShipControl.Processing.Kernel.NineCam.NineCamsVideoChannelConfiguration.
