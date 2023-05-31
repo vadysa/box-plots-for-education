@@ -1,0 +1,491 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ShipControl Monitoring Network API",
+    "description": "Сервис мониторинга сети.",
+    "version": "v1"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Проверить доступность сервиса.",
+        "responses": {
+          "200": {
+            "description": "Сервис доступен."
+          },
+          "404": {
+            "description": "Сервис недоступен."
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Проверить доступность сервиса.",
+        "responses": {
+          "200": {
+            "description": "Сервис доступен."
+          },
+          "404": {
+            "description": "Сервис недоступен."
+          }
+        }
+      }
+    },
+    "/api/v1/network/all": {
+      "get": {
+        "tags": [
+          "NetworkTest"
+        ],
+        "summary": "Возвращает результат проверки качества сети всех кораблей.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/NetworkStatistic"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/network": {
+      "get": {
+        "tags": [
+          "NetworkTest"
+        ],
+        "summary": "Возвращает результат проверки качества сети корабля.",
+        "parameters": [
+          {
+            "name": "shipName",
+            "in": "query",
+            "description": "Название корабля.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NetworkStatistic"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/configuration": {
+      "get": {
+        "tags": [
+          "NetworkTestConfiguration"
+        ],
+        "summary": "Возвращает конфигурацию.",
+        "responses": {
+          "200": {
+            "description": "Конфигурация получена."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkTestConfiguration"
+        ],
+        "summary": "Задаёт конфигурацию.",
+        "requestBody": {
+          "description": "Конфигурация.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NetworkTestConfiguration"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NetworkTestConfiguration"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NetworkTestConfiguration"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NetworkTestConfiguration"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Конфигурация задана."
+          }
+        }
+      }
+    },
+    "/version": {
+      "get": {
+        "tags": [
+          "Version"
+        ],
+        "summary": "Возвращает версию сервиса в виде строки.",
+        "responses": {
+          "200": {
+            "description": "Версия сервиса получена."
+          },
+          "404": {
+            "description": "Версию сервиса получить не удалось."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ByteSize": {
+        "type": "object",
+        "properties": {
+          "Bits": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Bytes": {
+            "type": "number",
+            "format": "double"
+          },
+          "KibiBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "MebiBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "GibiBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "TebiBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "PebiBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "KiloBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "MegaBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "GigaBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "TeraBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "PetaBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "LargestWholeNumberBinarySymbol": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "LargestWholeNumberDecimalSymbol": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "LargestWholeNumberBinaryValue": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "LargestWholeNumberDecimalValue": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ByteSpeed": {
+        "type": "object",
+        "properties": {
+          "ByteSize": {
+            "$ref": "#/components/schemas/ByteSize"
+          },
+          "LargestWholeNumberBinarySymbol": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "LargestWholeNumberDecimalSymbol": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "LargestWholeNumberBinaryValue": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "LargestWholeNumberDecimalValue": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NetworkPingParameters": {
+        "type": "object",
+        "properties": {
+          "host_address": {
+            "type": "string",
+            "description": "Адрес сети.",
+            "nullable": true
+          },
+          "count_of_ping": {
+            "type": "integer",
+            "description": "Количество запросов.",
+            "format": "int32"
+          },
+          "interval": {
+            "type": "string",
+            "description": "Возвращает или задаёт периодичность отправки ping-запросов.",
+            "format": "date-span"
+          },
+          "buffer_size": {
+            "type": "integer",
+            "description": "Размер массива отправляемых данных для проверки связи.",
+            "format": "int32"
+          },
+          "ttl": {
+            "type": "integer",
+            "description": "Число возможных переадресаций пакетов данных.",
+            "format": "int32"
+          },
+          "dont_fragment": {
+            "type": "boolean",
+            "description": "Доступность отправления данных по фрагментам."
+          },
+          "timeout": {
+            "type": "string",
+            "description": "Максимальное время ожидания ответа.",
+            "format": "date-span"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Параметры тестирования доступности сети."
+      },
+      "NetworkSpeedParameters": {
+        "type": "object",
+        "properties": {
+          "kernel_url": {
+            "type": "string",
+            "description": "Строка подключения к ядру.",
+            "nullable": true
+          },
+          "interval": {
+            "type": "string",
+            "description": "Возвращает или задаёт периодичность тестирования сети.",
+            "format": "date-span"
+          },
+          "panorama_size": {
+            "$ref": "#/components/schemas/Size"
+          },
+          "timeout": {
+            "type": "string",
+            "description": "Время ожидания ответа от ядра.",
+            "format": "date-span"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Параметры тестирования скорости сети."
+      },
+      "NetworkStatistic": {
+        "type": "object",
+        "properties": {
+          "IsNetworkWorking": {
+            "type": "boolean",
+            "description": "Возвращает или задаёт работает ли сеть."
+          },
+          "AverageTime": {
+            "type": "string",
+            "description": "Возвращает или задаёт среднее время ожидания ответов.",
+            "format": "date-span"
+          },
+          "MinTime": {
+            "type": "string",
+            "description": "Возвращает или задаёт минимальное время ожидания ответа.",
+            "format": "date-span"
+          },
+          "MaxTime": {
+            "type": "string",
+            "description": "Возвращает или задаёт максимальное время ожидания ответа.",
+            "format": "date-span"
+          },
+          "ReceivedPackets": {
+            "type": "integer",
+            "description": "Возвращает или задаёт количество полученных пакетов.",
+            "format": "int32"
+          },
+          "LostPackets": {
+            "type": "integer",
+            "description": "Возвращает или задаёт количество потерянных пакетов.",
+            "format": "int32"
+          },
+          "LostPacketsPercent": {
+            "type": "number",
+            "description": "Возвращает или задаёт процент потерянных пакетов.",
+            "format": "double"
+          },
+          "Speed": {
+            "$ref": "#/components/schemas/ByteSpeed"
+          },
+          "DelayTime": {
+            "type": "string",
+            "description": "Возвращает или задаёт время задержки.",
+            "format": "date-span"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Статистика сети."
+      },
+      "NetworkTestConfiguration": {
+        "type": "object",
+        "properties": {
+          "NetworkTestParameters": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/NetworkTestParameters"
+            },
+            "description": "Возвращает или задаёт параметры тестирование для каждой сети.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Общие параметры тестирования сети."
+      },
+      "NetworkTestParameters": {
+        "type": "object",
+        "properties": {
+          "IsEnabled": {
+            "type": "boolean",
+            "description": "Включено ли тестирование сети."
+          },
+          "NetworkPing": {
+            "$ref": "#/components/schemas/NetworkPingParameters"
+          },
+          "NetworkSpeed": {
+            "$ref": "#/components/schemas/NetworkSpeedParameters"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Параметры тестирования сети."
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string",
+            "nullable": true
+          },
+          "Title": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "Instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "Size": {
+        "type": "object",
+        "properties": {
+          "width": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "NetworkTestConfiguration",
+      "description": "Контроллер конфигурации мониторинга сети."
+    },
+    {
+      "name": "Health",
+      "description": "Контроллер проверки текущего состояния сервиса."
+    },
+    {
+      "name": "Version",
+      "description": "Контроллер, который позволяет узнать версию сервиса."
+    },
+    {
+      "name": "NetworkTest",
+      "description": "Контроллер тестирования сети."
+    }
+  ]
+}

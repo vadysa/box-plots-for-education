@@ -1,0 +1,825 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ShipControl Panorama Distributor API",
+    "description": "Сервис распределения панорамных изображений.",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/configuration/requestSettings": {
+      "get": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Возвращает параметры запроса панорамного изображения.",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Заменяет параметры запроса панорамного изображения.",
+        "requestBody": {
+          "description": "Новые параметры запроса панорамного изображения.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestSettings"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestSettings"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestSettings"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestSettings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/configuration/shipSources": {
+      "get": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Возвращает текущую конфигурацию источников кораблей.",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Заменяет текущую конфигурацию источников кораблей.",
+        "requestBody": {
+          "description": "Новая конфигурация источников кораблей.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShipSourcesConfiguration"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShipSourcesConfiguration"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShipSourcesConfiguration"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShipSourcesConfiguration"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/deliveryServices": {
+      "get": {
+        "tags": [
+          "DeliveryServices"
+        ],
+        "summary": "Возвращает список подключений у сервиса.",
+        "responses": {
+          "200": {
+            "description": "Список подключенных сервисов отправлен.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Проверить доступность сервиса.",
+        "responses": {
+          "200": {
+            "description": "Сервис доступен."
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Проверить доступность сервиса.",
+        "responses": {
+          "200": {
+            "description": "Сервис доступен."
+          }
+        }
+      }
+    },
+    "/api/v1/panoramaImage/detections": {
+      "post": {
+        "tags": [
+          "PanoramaImage"
+        ],
+        "summary": "Возвращает детекций вместе с панорамным изображением.",
+        "parameters": [
+          {
+            "name": "kernelUrl",
+            "in": "query",
+            "description": "Строка подключения к API ядра.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isEnabledSync",
+            "in": "query",
+            "description": "Включена ли синхронизация.",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Модель запроса.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanoramaImageRequestModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanoramaImageRequestModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanoramaImageRequestModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanoramaImageRequestModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Детекций вместе с панорамным изображением отправлены."
+          },
+          "204": {
+            "description": "Панорамное изображение уже было отправлено ранее."
+          },
+          "404": {
+            "description": "Панорамное изображение отсутствует.",
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/panoramaImage": {
+      "post": {
+        "tags": [
+          "PanoramaImage"
+        ],
+        "summary": "Возвращает панорамное изображение.",
+        "parameters": [
+          {
+            "name": "kernelUrl",
+            "in": "query",
+            "description": "Строка подключения к API ядра.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Модель запроса.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanoramaImageRequestModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanoramaImageRequestModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanoramaImageRequestModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanoramaImageRequestModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Панорамное изображение отправлено."
+          },
+          "204": {
+            "description": "Панорамное изображение уже было отправлено ранее."
+          },
+          "404": {
+            "description": "Панорамное изображение отсутствует.",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/panoramaImage/detections/{presetId}": {
+      "get": {
+        "tags": [
+          "PanoramaImage"
+        ],
+        "summary": "Возвращает детекций вместе с панорамным изображением по пресету.",
+        "parameters": [
+          {
+            "name": "presetId",
+            "in": "path",
+            "description": "Номер пресета.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "kernelUrl",
+            "in": "query",
+            "description": "Строка подключения к API ядра.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isEnabledSync",
+            "in": "query",
+            "description": "Включена ли синхронизация.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "lastPanoramaBuildTime",
+            "in": "query",
+            "description": "Время предыдущего получения панорамы.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Детекций вместе с панорамным изображением отправлены."
+          },
+          "204": {
+            "description": "Панорамное изображение уже было отправлено ранее."
+          },
+          "404": {
+            "description": "Панорамное изображение или пресет отсутствует.",
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/panoramaImage/{presetId}": {
+      "get": {
+        "tags": [
+          "PanoramaImage"
+        ],
+        "summary": "Возвращает панорамное изображение по пресету.",
+        "parameters": [
+          {
+            "name": "presetId",
+            "in": "path",
+            "description": "Номер пресета.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "kernelUrl",
+            "in": "query",
+            "description": "Строка подключения к API ядра.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lastPanoramaBuildTime",
+            "in": "query",
+            "description": "Время предыдущего получения панорамы.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Панорамное изображение отправлено."
+          },
+          "204": {
+            "description": "Панорамное изображение уже было отправлено ранее."
+          },
+          "404": {
+            "description": "Панорамное изображение или пресет отсутствует.",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/panoramaImage/preset/all": {
+      "get": {
+        "tags": [
+          "Preset"
+        ],
+        "summary": "Возвращает пресеты всех кораблей.",
+        "responses": {
+          "200": {
+            "description": "Пресеты всех кораблей отправлены.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/ShipPresets"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/ShipPresets"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/ShipPresets"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/panoramaImage/preset": {
+      "get": {
+        "tags": [
+          "Preset"
+        ],
+        "summary": "Возвращает пресеты ядра у заданного корабля.",
+        "parameters": [
+          {
+            "name": "kernelUrl",
+            "in": "query",
+            "description": "Строка подключения к API ядра.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Пресеты ядра отправлены.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/PanoramaPreset"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/PanoramaPreset"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/PanoramaPreset"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Пресеты для заданного ядра отсутствуют.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Preset"
+        ],
+        "summary": "Устанавливает новые пресеты у заданного корабля.",
+        "parameters": [
+          {
+            "name": "kernelUrl",
+            "in": "query",
+            "description": "Строка подключения к API ядра.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Пресеты панорамного изображения.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShipPresets"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShipPresets"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShipPresets"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShipPresets"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Пресеты установлены."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Preset"
+        ],
+        "summary": "Удаляет настройки пресетов у заданного корабля.",
+        "parameters": [
+          {
+            "name": "kernelUrl",
+            "in": "query",
+            "description": "Строка подключения к API ядра.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Пресеты удалены."
+          },
+          "404": {
+            "description": "Пресеты для заданного ядра отсутствуют."
+          }
+        }
+      }
+    },
+    "/version": {
+      "get": {
+        "tags": [
+          "Version"
+        ],
+        "summary": "Возвращает версию сервиса в виде строки.",
+        "responses": {
+          "200": {
+            "description": "Версия сервиса получена."
+          },
+          "404": {
+            "description": "Версию сервиса получить не удалось."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PanoramaImageRequestModel": {
+        "type": "object",
+        "properties": {
+          "Preset": {
+            "$ref": "#/components/schemas/PanoramaPreset"
+          },
+          "PrevBuildTime": {
+            "type": "string",
+            "description": "Время предыдущего получения панорамы.",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Модель запроса для получения панорамного изображения."
+      },
+      "PanoramaPreset": {
+        "type": "object",
+        "properties": {
+          "rectangle": {
+            "$ref": "#/components/schemas/RectangleF"
+          },
+          "size": {
+            "$ref": "#/components/schemas/Size"
+          },
+          "quality": {
+            "type": "integer",
+            "description": "Возвращает или задаёт качество изображения.",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Пресет панорамы."
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string",
+            "nullable": true
+          },
+          "Title": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "Instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "RectangleF": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "float"
+          },
+          "y": {
+            "type": "number",
+            "format": "float"
+          },
+          "width": {
+            "type": "number",
+            "format": "float"
+          },
+          "height": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RequestSettings": {
+        "type": "object",
+        "properties": {
+          "waiting_time_limit": {
+            "type": "string",
+            "description": "Лимит времени на ожидание повторного запроса панорамного изображения.",
+            "format": "date-span"
+          },
+          "delay_between_requests": {
+            "type": "string",
+            "description": "Задержка между запросами получения панорамного изображения.",
+            "format": "date-span"
+          },
+          "max_quality_reset_timeout": {
+            "type": "string",
+            "description": "Время ожидания до сброса максимального качества.",
+            "format": "date-span"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Параметры запросов панорамного изображения."
+      },
+      "ShipAutoQualityParameters": {
+        "type": "object",
+        "properties": {
+          "max_waiting_limit": {
+            "type": "string",
+            "description": "Лимит верхнего порога ожидания панорамы.",
+            "format": "date-span"
+          },
+          "min_waiting_limit": {
+            "type": "string",
+            "description": "Лимит нижнего порога ожидания панорамы.",
+            "format": "date-span"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Представляет параметры авто-качества корабля."
+      },
+      "ShipPresets": {
+        "type": "object",
+        "properties": {
+          "auto_quality": {
+            "$ref": "#/components/schemas/ShipAutoQualityParameters"
+          },
+          "presets": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/PanoramaPreset"
+            },
+            "description": "Пресеты панорамного изображения.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Представляет пресеты корабля."
+      },
+      "ShipSourcesConfiguration": {
+        "type": "object",
+        "properties": {
+          "ships": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ShipPresets"
+            },
+            "description": "Список конфигурации источников кораблей.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Представляет конфигурацию источников кораблей."
+      },
+      "Size": {
+        "type": "object",
+        "properties": {
+          "width": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Health",
+      "description": "Контроллер проверки текущего состояния сервиса."
+    },
+    {
+      "name": "Version",
+      "description": "Контроллер, который позволяет узнать версию сервиса."
+    },
+    {
+      "name": "DeliveryServices",
+      "description": "Контроллер сервисов передачи панорамного изображения."
+    },
+    {
+      "name": "PanoramaImage",
+      "description": "Контроллер панорамного изображения."
+    },
+    {
+      "name": "Preset",
+      "description": "Контроллер пресетов панорамного изображения."
+    },
+    {
+      "name": "Configuration",
+      "description": "Контроллер конфигурации распределителя панорамного изображения."
+    }
+  ]
+}

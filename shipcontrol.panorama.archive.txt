@@ -1,0 +1,783 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ShipControl Panorama Archive API",
+    "description": "Сервис архива панорамы.",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/dumps/detection": {
+      "get": {
+        "tags": [
+          "DumpExport"
+        ],
+        "summary": "Возвращает даты дампов детекций.",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Начальное время интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "Конечное время интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Возвращены даты дампов детекций.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/dumps/panorama": {
+      "get": {
+        "tags": [
+          "DumpExport"
+        ],
+        "summary": "Возвращает даты дампов панорамных изображений.",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Начальное время интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "Конечное время интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Возвращены даты дампов панорамных изображений.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/dumps/archive/panorama": {
+      "post": {
+        "tags": [
+          "DumpExport"
+        ],
+        "summary": "Создаёт дамп панорамных изображений.",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Дата записи дампа.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Начальное время интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date-span"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "Конечное время интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date-span"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Дамп панорамных изображений был создан.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/dumps/archive/{id}/status": {
+      "get": {
+        "tags": [
+          "DumpExport"
+        ],
+        "summary": "Возвращает статус архивации дампа.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Уникальный идентификатор архивного файла.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Статус архивации дампа получен.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchiveStatus"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchiveStatus"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchiveStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/dumps/archive/{id}/download": {
+      "get": {
+        "tags": [
+          "DumpExport"
+        ],
+        "summary": "Скачивает дамп файлов.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Уникальный идентификатор архивного файла.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "206": {
+            "description": "Дамп получен."
+          },
+          "404": {
+            "description": "Дамп не найден.",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Дампа не готов к скачиванию.",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "416": {
+            "description": "Ошибка чтения дампа.",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Проверить доступность сервиса.",
+        "responses": {
+          "200": {
+            "description": "Сервис доступен."
+          },
+          "404": {
+            "description": "Сервис недоступен."
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Проверить доступность сервиса.",
+        "responses": {
+          "200": {
+            "description": "Сервис доступен."
+          },
+          "404": {
+            "description": "Сервис недоступен."
+          }
+        }
+      }
+    },
+    "/panorama/archive/images/count": {
+      "get": {
+        "tags": [
+          "PanoramaArchive"
+        ],
+        "summary": "Возвращает количество изображений за выбранный интервал.",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Начальное время интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "Конечное время интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/panorama/archive/images/dates": {
+      "get": {
+        "tags": [
+          "PanoramaArchive"
+        ],
+        "summary": "Возвращает даты за выбранный интервал, для которых присутствуют изображения.",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Начальная дата интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "Конечная дата интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/panorama/archive/images/recordings": {
+      "get": {
+        "tags": [
+          "PanoramaArchive"
+        ],
+        "summary": "Возвращает временные интервалы записи панорамных изображений за выбранный интервал.",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Начальное время интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "Конечное время интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PanoramaRecording"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/panorama/archive/images/metadata": {
+      "get": {
+        "tags": [
+          "PanoramaArchive"
+        ],
+        "summary": "Возвращает метаданные изображений за выбранный интервал.",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Начальное время интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "Конечное время интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PanoramaImageMetadata"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/panorama/archive/images/metadata/next": {
+      "get": {
+        "tags": [
+          "PanoramaArchive"
+        ],
+        "summary": "Возвращает ближайший экземпляр метаданных записи после заданного времени.",
+        "description": "Если запись подходящая не найдена, вернёт null.",
+        "parameters": [
+          {
+            "name": "nextTo",
+            "in": "query",
+            "description": "Отправная точка поиска.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PanoramaImageMetadata"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/panorama/archive/image": {
+      "post": {
+        "tags": [
+          "PanoramaArchive"
+        ],
+        "summary": "Возвращает изображение по его имени.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Имя изображения.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Пресет панорамы.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanoramaPreset"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanoramaPreset"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanoramaPreset"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanoramaPreset"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/version": {
+      "get": {
+        "tags": [
+          "Version"
+        ],
+        "summary": "Возвращает версию сервиса в виде строки.",
+        "responses": {
+          "200": {
+            "description": "Версия сервиса получена."
+          },
+          "404": {
+            "description": "Версию сервиса получить не удалось."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ArchiveStatus": {
+        "enum": [
+          "Processing",
+          "Ready",
+          "Failed",
+          "Expired"
+        ],
+        "type": "string",
+        "description": "Представляет статус архивации данных.\n\nProcessing (Данные архивируются.)\n\nReady (Данные за архивированы.)\n\nFailed (Ошибка архивации данных.)\n\nExpired (Время хранения архива истекло.)",
+        "x-enumNames": [
+          "Processing",
+          "Ready",
+          "Failed",
+          "Expired"
+        ],
+        "x-enumDescriptions": [
+          "Данные архивируются.",
+          "Данные за архивированы.",
+          "Ошибка архивации данных.",
+          "Время хранения архива истекло."
+        ]
+      },
+      "PanoramaImageMetadata": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Идентификатор изображения.",
+            "nullable": true
+          },
+          "creation_time": {
+            "type": "string",
+            "description": "Время создания панорамного изображения.",
+            "format": "date-time"
+          },
+          "image_size": {
+            "$ref": "#/components/schemas/Size"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Метаданные панорамного изображения."
+      },
+      "PanoramaPreset": {
+        "type": "object",
+        "properties": {
+          "rectangle": {
+            "$ref": "#/components/schemas/RectangleF"
+          },
+          "size": {
+            "$ref": "#/components/schemas/Size"
+          },
+          "quality": {
+            "type": "integer",
+            "description": "Возвращает или задаёт качество изображения.",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Пресет панорамы."
+      },
+      "PanoramaRecording": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "description": "Возвращает время начала интервала записи панорамных изображений.",
+            "format": "date-time"
+          },
+          "end": {
+            "type": "string",
+            "description": "Возвращает время окончания интервала записи панорамных изображений.",
+            "format": "date-time"
+          },
+          "frames": {
+            "type": "integer",
+            "description": "Возвращает количество сохраненных панорамных изображений.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Информация о временном интервале записи панорамных изображений."
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string",
+            "nullable": true
+          },
+          "Title": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "Instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "RectangleF": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "float"
+          },
+          "y": {
+            "type": "number",
+            "format": "float"
+          },
+          "width": {
+            "type": "number",
+            "format": "float"
+          },
+          "height": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Size": {
+        "type": "object",
+        "properties": {
+          "width": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DumpExport",
+      "description": "Контроллер экспорта панорамных изображений и детекций на панораме."
+    },
+    {
+      "name": "Health",
+      "description": "Контроллер проверки текущего состояния сервиса."
+    },
+    {
+      "name": "PanoramaArchive",
+      "description": "Контроллер взаимодействия с архивом панорамных изображений."
+    },
+    {
+      "name": "Version",
+      "description": "Контроллер, который позволяет узнать версию сервиса."
+    }
+  ]
+}

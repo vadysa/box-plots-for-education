@@ -1,0 +1,1350 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ShipControl Archive API",
+    "description": "Сервис архивных данных. Используется для записи и чтений распознанных детекций в базе данных.",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/archive/save/cameraDetection/{frameId}": {
+      "post": {
+        "tags": [
+          "Archive"
+        ],
+        "summary": "Сохраняет детекции с камеры.",
+        "parameters": [
+          {
+            "name": "frameId",
+            "in": "path",
+            "description": "Идентификатор кадра на отдельной камере.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Детекции с камеры.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CameraDetection"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CameraDetection"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CameraDetection"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CameraDetection"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Детекция сохранёна."
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/archive/save/cameraFrames": {
+      "post": {
+        "tags": [
+          "Archive"
+        ],
+        "summary": "Сохраняет информацию о кадрах камеры в архив.",
+        "requestBody": {
+          "description": "Информация о кадрах камеры.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/NineCamsCameraFrameEntity"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/NineCamsCameraFrameEntity"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/NineCamsCameraFrameEntity"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/NineCamsCameraFrameEntity"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о кадрах сохранёна."
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/archive/save/panoramaFrame": {
+      "post": {
+        "tags": [
+          "Archive"
+        ],
+        "summary": "Сохраняет информацию о кадре панорамы в архив.",
+        "requestBody": {
+          "description": "Информация о кадре панорамы.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NineCamsPanoramaFrameEntity"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NineCamsPanoramaFrameEntity"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NineCamsPanoramaFrameEntity"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NineCamsPanoramaFrameEntity"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о кадре сохранёна."
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/archive/save/metadata": {
+      "post": {
+        "tags": [
+          "Archive"
+        ],
+        "summary": "Сохраняет метаданные панорамного изображения в архив.",
+        "requestBody": {
+          "description": "Метаданные панорамного изображения.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NineCamsPanoramaMetadata"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NineCamsPanoramaMetadata"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NineCamsPanoramaMetadata"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NineCamsPanoramaMetadata"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Идентификатор сохранённых метаданных.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/archive/cameraFrames/{camType}": {
+      "get": {
+        "tags": [
+          "Archive"
+        ],
+        "summary": "Получает кадры с камеры из архива.",
+        "parameters": [
+          {
+            "name": "camType",
+            "in": "path",
+            "description": "Тип камеры.\n\nCAM1 (Основная камера.)\n\nCAM2\n\nCAM3\n\nCAM4\n\nCAM5\n\nCAM6\n\nCAM7\n\nCAM8\n\nCAM9",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NineCams"
+            },
+            "x-enumNames": [
+              "Cam1",
+              "Cam2",
+              "Cam3",
+              "Cam4",
+              "Cam5",
+              "Cam6",
+              "Cam7",
+              "Cam8",
+              "Cam9"
+            ],
+            "x-enumDescriptions": [
+              "Основная камера.",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "name": "initTime",
+            "in": "query",
+            "description": "Время создания кадра.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "deltaTime",
+            "in": "query",
+            "description": "Интервал за который нужно получить кадры.",
+            "schema": {
+              "type": "string",
+              "format": "date-span"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Кадры с камеры получены.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NineCamsCameraFrameEntity"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/archive/panoramaFrames": {
+      "get": {
+        "tags": [
+          "Archive"
+        ],
+        "summary": "Получает информацию о кадрах панорамы из архива.",
+        "parameters": [
+          {
+            "name": "initTime",
+            "in": "query",
+            "description": "Время создания кадра.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "deltaTime",
+            "in": "query",
+            "description": "Интервал за который нужно получить кадры.",
+            "schema": {
+              "type": "string",
+              "format": "date-span"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Информация о кадрах панорамы получена.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NineCamsPanoramaFrameEntity"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/archive/cameraFrame": {
+      "put": {
+        "tags": [
+          "Archive"
+        ],
+        "summary": "Обновляет информацию о кадре камеры из архива.",
+        "requestBody": {
+          "description": "Информация о кадре камеры.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NineCamsCameraFrameEntity"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NineCamsCameraFrameEntity"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NineCamsCameraFrameEntity"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NineCamsCameraFrameEntity"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о кадре камеры обновлена."
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/archive/cameraDetection": {
+      "put": {
+        "tags": [
+          "Archive"
+        ],
+        "summary": "Обновляет детекцию с камеры.",
+        "requestBody": {
+          "description": "Детекция на кадре камеры.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CameraDetectionEntity"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CameraDetectionEntity"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CameraDetectionEntity"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CameraDetectionEntity"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Детекция с камеры обновлена."
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/archive/cameraDetection/{id}": {
+      "delete": {
+        "tags": [
+          "Archive"
+        ],
+        "summary": "Помечает детекцию удалённой.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор детекции.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Детекция помечена как удалённая."
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/archive/export/create/dump": {
+      "post": {
+        "tags": [
+          "ArchiveExport"
+        ],
+        "summary": "Создаёт дамп архивных данных.",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Начальное время интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "Конечное время интервала.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Дамп создан."
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/archive/range/cameraFrames/{camType}": {
+      "get": {
+        "tags": [
+          "ArchiveRange"
+        ],
+        "summary": "Возвращает интервал записей кадров.",
+        "parameters": [
+          {
+            "name": "camType",
+            "in": "path",
+            "description": "Тип камеры.\n\nCAM1 (Основная камера.)\n\nCAM2\n\nCAM3\n\nCAM4\n\nCAM5\n\nCAM6\n\nCAM7\n\nCAM8\n\nCAM9",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NineCams"
+            },
+            "x-enumNames": [
+              "Cam1",
+              "Cam2",
+              "Cam3",
+              "Cam4",
+              "Cam5",
+              "Cam6",
+              "Cam7",
+              "Cam8",
+              "Cam9"
+            ],
+            "x-enumDescriptions": [
+              "Основная камера.",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Сформированный ответ.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecordsRangeInfo"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "У видеоисточника camType отсутствуют записи.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ArchiveRange"
+        ],
+        "summary": "Удаляет информацию о кадрах камеры за указанный интервал.",
+        "description": "Если start равен `null`, то будут удалёны все кадры с самого начала до end.",
+        "parameters": [
+          {
+            "name": "camType",
+            "in": "path",
+            "description": "Тип камеры.\n\nCAM1 (Основная камера.)\n\nCAM2\n\nCAM3\n\nCAM4\n\nCAM5\n\nCAM6\n\nCAM7\n\nCAM8\n\nCAM9",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NineCams"
+            },
+            "x-enumNames": [
+              "Cam1",
+              "Cam2",
+              "Cam3",
+              "Cam4",
+              "Cam5",
+              "Cam6",
+              "Cam7",
+              "Cam8",
+              "Cam9"
+            ],
+            "x-enumDescriptions": [
+              "Основная камера.",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Начальное время интервала удаления.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "Конечное время интервала удаления.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Кадры удалены."
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/archive/range/panoramaFrames": {
+      "get": {
+        "tags": [
+          "ArchiveRange"
+        ],
+        "summary": "Возвращает интервал записей информации о кадрах панорамы.",
+        "responses": {
+          "200": {
+            "description": "Сформированный ответ.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecordsRangeInfo"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Записи отсутствуют.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ArchiveRange"
+        ],
+        "summary": "Удаляет информацию о кадрах панорамы за указанный интервал.",
+        "description": "Если start равен `null`, то будет удалёна вся информация о кадрах панорамы\r\nс самого начала до end.",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Начальное время интервала удаления.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "Конечное время интервала удаления.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Информация о кадрах панорамы удалена."
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/api/v1/archive/range/cameraFrames/{camType}/edit": {
+      "get": {
+        "tags": [
+          "ArchiveRange"
+        ],
+        "summary": "Возвращает временные метки отредактированной информации о кадрах камеры.",
+        "description": "Если start равен `null`, то интервал будет с самого начала до end.\r\nЕсли end не указан, то интервал не будет учитываться.",
+        "parameters": [
+          {
+            "name": "camType",
+            "in": "path",
+            "description": "Тип камеры.\n\nCAM1 (Основная камера.)\n\nCAM2\n\nCAM3\n\nCAM4\n\nCAM5\n\nCAM6\n\nCAM7\n\nCAM8\n\nCAM9",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NineCams"
+            },
+            "x-enumNames": [
+              "Cam1",
+              "Cam2",
+              "Cam3",
+              "Cam4",
+              "Cam5",
+              "Cam6",
+              "Cam7",
+              "Cam8",
+              "Cam9"
+            ],
+            "x-enumDescriptions": [
+              "Основная камера.",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ]
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Начальное время интервала записей.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "Конечное время интервала записей.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Сформированный ответ.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Проверить доступность сервиса.",
+        "responses": {
+          "200": {
+            "description": "Сервис доступен."
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Проверить доступность сервиса.",
+        "responses": {
+          "200": {
+            "description": "Сервис доступен."
+          }
+        }
+      }
+    },
+    "/version": {
+      "get": {
+        "tags": [
+          "Version"
+        ],
+        "summary": "Возвращает версию сервиса в виде строки.",
+        "responses": {
+          "200": {
+            "description": "Версия сервиса получена."
+          },
+          "404": {
+            "description": "Версию сервиса получить не удалось."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AlgRectangleF": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "float"
+          },
+          "y": {
+            "type": "number",
+            "format": "float"
+          },
+          "width": {
+            "type": "number",
+            "format": "float"
+          },
+          "height": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CameraDetection": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "$ref": "#/components/schemas/AlgRectangleF"
+          },
+          "ship_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ship_type": {
+            "$ref": "#/components/schemas/ShipTypes"
+          },
+          "object_confidence": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "class_confidence": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "distance": {
+            "type": "number",
+            "description": "Возвращает определённую дистанцию до судна.",
+            "format": "float",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CameraDetectionEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор.",
+            "format": "uuid"
+          },
+          "frame_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "detection": {
+            "$ref": "#/components/schemas/CameraDetection"
+          },
+          "edited_detection": {
+            "$ref": "#/components/schemas/CameraDetection"
+          },
+          "is_deleted": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Сущность детекций на отдельной камере."
+      },
+      "CameraMetadata": {
+        "type": "object",
+        "properties": {
+          "sector": {
+            "$ref": "#/components/schemas/Sector"
+          },
+          "image_position": {
+            "$ref": "#/components/schemas/Sector"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Хранит сведения о том, как на панорамном изображение отображается конкретная камера."
+      },
+      "LineF": {
+        "type": "object",
+        "properties": {
+          "x1": {
+            "type": "number",
+            "description": "Координата первой точки по оси асбцисс.",
+            "format": "float"
+          },
+          "x2": {
+            "type": "number",
+            "description": "Координата второй точки по оси асбцисс.",
+            "format": "float"
+          },
+          "y1": {
+            "type": "number",
+            "description": "Координата первой точки по оси ординат.",
+            "format": "float"
+          },
+          "y2": {
+            "type": "number",
+            "description": "Координата второй точки по оси ординат.",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Линия, заданная двумя точками."
+      },
+      "NineCams": {
+        "enum": [
+          "CAM1",
+          "CAM2",
+          "CAM3",
+          "CAM4",
+          "CAM5",
+          "CAM6",
+          "CAM7",
+          "CAM8",
+          "CAM9"
+        ],
+        "type": "string",
+        "description": "Типы обзоров для 9 камер.\n\nCAM1 (Основная камера.)\n\nCAM2\n\nCAM3\n\nCAM4\n\nCAM5\n\nCAM6\n\nCAM7\n\nCAM8\n\nCAM9",
+        "x-enumNames": [
+          "Cam1",
+          "Cam2",
+          "Cam3",
+          "Cam4",
+          "Cam5",
+          "Cam6",
+          "Cam7",
+          "Cam8",
+          "Cam9"
+        ],
+        "x-enumDescriptions": [
+          "Основная камера.",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "NineCamsCameraFrameEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор.",
+            "format": "uuid"
+          },
+          "initial_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "receive_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "is_edit": {
+            "type": "boolean"
+          },
+          "edit_time": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "horizon_line": {
+            "$ref": "#/components/schemas/LineF"
+          },
+          "horizon_roi": {
+            "$ref": "#/components/schemas/RoI"
+          },
+          "camera_type": {
+            "$ref": "#/components/schemas/NineCams"
+          },
+          "detections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CameraDetectionEntity"
+            },
+            "description": "Детекции с камеры.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Сущность кадра на отдельной камере."
+      },
+      "NineCamsPanoramaFrameEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор.",
+            "format": "uuid"
+          },
+          "metadata_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "initial_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "receive_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/NineCamsPanoramaMetadata"
+          },
+          "detections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PanoramaDetectionEntity"
+            },
+            "description": "Детекции с панорамного изображения.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Сущность отдельного кадра панорамы."
+      },
+      "NineCamsPanoramaMetadata": {
+        "type": "object",
+        "properties": {
+          "viewing_angle": {
+            "$ref": "#/components/schemas/PanoramaViewingRange"
+          },
+          "camera_metadata": {
+            "type": "object",
+            "properties": {
+              "CAM1": {
+                "$ref": "#/components/schemas/CameraMetadata"
+              },
+              "CAM2": {
+                "$ref": "#/components/schemas/CameraMetadata"
+              },
+              "CAM3": {
+                "$ref": "#/components/schemas/CameraMetadata"
+              },
+              "CAM4": {
+                "$ref": "#/components/schemas/CameraMetadata"
+              },
+              "CAM5": {
+                "$ref": "#/components/schemas/CameraMetadata"
+              },
+              "CAM6": {
+                "$ref": "#/components/schemas/CameraMetadata"
+              },
+              "CAM7": {
+                "$ref": "#/components/schemas/CameraMetadata"
+              },
+              "CAM8": {
+                "$ref": "#/components/schemas/CameraMetadata"
+              },
+              "CAM9": {
+                "$ref": "#/components/schemas/CameraMetadata"
+              }
+            },
+            "additionalProperties": false,
+            "description": "Возвращает набор метаданных по каждой камере.",
+            "nullable": true
+          },
+          "size": {
+            "$ref": "#/components/schemas/Size"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Метаданные панорамного изображения."
+      },
+      "PanoramaBoundingBox": {
+        "type": "object",
+        "properties": {
+          "box": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PanoramaPoint"
+            },
+            "description": "Возвращает или задаёт точки четырёхугольника.",
+            "nullable": true
+          },
+          "a1": {
+            "type": "number",
+            "description": "Возвращает или задаёт положение левой точки ShipControl.Processing.Contracts.Panorama.PanoramaBoundingBox.Points в градусах.",
+            "format": "float"
+          },
+          "a2": {
+            "type": "number",
+            "description": "Возвращает или задаёт положение правой точки ShipControl.Processing.Contracts.Panorama.PanoramaBoundingBox.Points в градусах.",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Результаты детекции в системе координат панорамного изображения."
+      },
+      "PanoramaDetectionEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор.",
+            "format": "uuid"
+          },
+          "frame_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lost_frame_count": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "position": {
+            "$ref": "#/components/schemas/PanoramaBoundingBox"
+          },
+          "ship_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ship_type": {
+            "$ref": "#/components/schemas/ShipTypes"
+          },
+          "object_confidence": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "class_confidence": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "distance": {
+            "type": "number",
+            "description": "Возвращает определённую дистанцию до судна.",
+            "format": "float",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Сущность детекций на панораме."
+      },
+      "PanoramaPoint": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "integer",
+            "description": "Возвращает или задаёт координату X точки в системе координат панорамы.",
+            "format": "int32"
+          },
+          "y": {
+            "type": "integer",
+            "description": "Возвращает или задаёт координату Y точки в системе координат панорамы.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Точка в системе координат панорамного изображения."
+      },
+      "PanoramaViewingRange": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "integer",
+            "description": "Начало угла обзора.",
+            "format": "int32"
+          },
+          "end": {
+            "type": "integer",
+            "description": "Конец угла обзора.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Диапазон начала и конца угла обзора панорамы в градусах."
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string",
+            "nullable": true
+          },
+          "Title": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "Instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "RecordsRangeInfo": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "description": "Возвращает время начала списка записей.",
+            "format": "date-time"
+          },
+          "end": {
+            "type": "string",
+            "description": "Возвращает время окончания списка записей.",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Информация об временном интервале записей."
+      },
+      "RoI": {
+        "type": "object",
+        "properties": {
+          "top": {
+            "type": "number",
+            "description": "Возвращает или задаёт значение [0, 1] для Y-координаты верхней линии RoI.",
+            "format": "float"
+          },
+          "bottom": {
+            "type": "number",
+            "description": "Возвращает или задаёт значение [0, 1] для Y-координаты нижней линии RoI.",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Sector": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "number",
+            "description": "Возвращает начало сектора.",
+            "format": "float"
+          },
+          "end": {
+            "type": "number",
+            "description": "Возвращает конец сектора.",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Представляет сектор."
+      },
+      "ShipTypes": {
+        "enum": [
+          "Cargo",
+          "DynamicHovercraft",
+          "Hovercraft",
+          "Military",
+          "Passenger",
+          "Raid",
+          "Recreational",
+          "Sailing",
+          "Undefined"
+        ],
+        "type": "string",
+        "description": "\n\nCargo\n\nDynamicHovercraft\n\nHovercraft\n\nMilitary\n\nPassenger\n\nRaid\n\nRecreational\n\nSailing\n\nUndefined",
+        "x-enumNames": [
+          "Cargo",
+          "DynamicHovercraft",
+          "Hovercraft",
+          "Military",
+          "Passenger",
+          "Raid",
+          "Recreational",
+          "Sailing",
+          "Undefined"
+        ],
+        "x-enumDescriptions": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "Size": {
+        "type": "object",
+        "properties": {
+          "width": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Health",
+      "description": "Контроллер проверки текущего состояния сервиса."
+    },
+    {
+      "name": "Version",
+      "description": "Контроллер, который позволяет узнать версию сервиса."
+    },
+    {
+      "name": "Archive",
+      "description": "Контроллер архивных данных."
+    },
+    {
+      "name": "ArchiveExport",
+      "description": "Контроллер архивных данных."
+    },
+    {
+      "name": "ArchiveRange",
+      "description": "Контроллер архивных данных в промежутках времени."
+    }
+  ]
+}

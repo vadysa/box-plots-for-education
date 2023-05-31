@@ -1,0 +1,709 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ShipControl Monitoring API",
+    "description": "Сервис мониторинга системы.",
+    "version": "v1"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Проверить доступность сервиса.",
+        "responses": {
+          "200": {
+            "description": "Сервис доступен."
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Проверить доступность сервиса.",
+        "responses": {
+          "200": {
+            "description": "Сервис доступен."
+          }
+        }
+      }
+    },
+    "/api/v1/metrics": {
+      "get": {
+        "tags": [
+          "Metrics"
+        ],
+        "summary": "Возвращает параметры отслеживаемой системы.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemUsage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/metrics/cpu": {
+      "get": {
+        "tags": [
+          "Metrics"
+        ],
+        "summary": "Возвращает использование центрального процессора.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageCPU"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/metrics/gpu": {
+      "get": {
+        "tags": [
+          "Metrics"
+        ],
+        "summary": "Возвращает использование всех графических процессоров.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsageGPU"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/metrics/ram": {
+      "get": {
+        "tags": [
+          "Metrics"
+        ],
+        "summary": "Возвращает использование оперативной памяти.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageRAM"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/metrics/storage": {
+      "get": {
+        "tags": [
+          "Metrics"
+        ],
+        "summary": "Возвращает использование памяти файловой системы.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageStorage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/network": {
+      "get": {
+        "tags": [
+          "Network"
+        ],
+        "summary": "Возвращает информацию о сети.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NetworkInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/configuration": {
+      "get": {
+        "tags": [
+          "PrometheusMonitoringConfiguration"
+        ],
+        "summary": "Возвращает текущий конфигурационный файл.",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/configuration/mountPoint/all": {
+      "get": {
+        "tags": [
+          "PrometheusMonitoringConfiguration"
+        ],
+        "summary": "Возвращает все точки монтирования.",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/configuration/mountPoint": {
+      "post": {
+        "tags": [
+          "PrometheusMonitoringConfiguration"
+        ],
+        "summary": "Заменяет отслеживаемую точку монтирования.",
+        "parameters": [
+          {
+            "name": "mountPoint",
+            "in": "query",
+            "description": "Точка монтирования.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/systemAvailability": {
+      "get": {
+        "tags": [
+          "SystemAvailability"
+        ],
+        "summary": "Возвращает информацию о доступности компонентов системы.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NineCamsSystemComponentsInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/version": {
+      "get": {
+        "tags": [
+          "Version"
+        ],
+        "summary": "Возвращает версию сервиса в виде строки.",
+        "responses": {
+          "200": {
+            "description": "Версия сервиса получена."
+          },
+          "404": {
+            "description": "Версию сервиса получить не удалось."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ByteSize": {
+        "type": "object",
+        "properties": {
+          "Bits": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Bytes": {
+            "type": "number",
+            "format": "double"
+          },
+          "KibiBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "MebiBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "GibiBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "TebiBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "PebiBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "KiloBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "MegaBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "GigaBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "TeraBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "PetaBytes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "LargestWholeNumberBinarySymbol": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "LargestWholeNumberDecimalSymbol": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "LargestWholeNumberBinaryValue": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "LargestWholeNumberDecimalValue": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ByteSpeed": {
+        "type": "object",
+        "properties": {
+          "ByteSize": {
+            "$ref": "#/components/schemas/ByteSize"
+          },
+          "LargestWholeNumberBinarySymbol": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "LargestWholeNumberDecimalSymbol": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "LargestWholeNumberBinaryValue": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "LargestWholeNumberDecimalValue": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InterfaceInfo": {
+        "type": "object",
+        "properties": {
+          "IsWorking": {
+            "type": "boolean",
+            "description": "Возвращает или задаёт работает ли интерфейс."
+          },
+          "DownloadSpeed": {
+            "$ref": "#/components/schemas/ByteSpeed"
+          },
+          "UploadSpeed": {
+            "$ref": "#/components/schemas/ByteSpeed"
+          },
+          "PacketDownloadSpeed": {
+            "type": "number",
+            "description": "Возвращает или задаёт количество отправленных пакетов интерфейсом в секунду.",
+            "format": "double"
+          },
+          "PacketUploadSpeed": {
+            "type": "number",
+            "description": "Возвращает или задаёт количество запрошенных пакетов интерфейсом в секунду.",
+            "format": "double"
+          },
+          "MaxPacketSize": {
+            "type": "integer",
+            "description": "Возвращает или задаёт размер самого большого пакета,\r\nкоторый может быть отправлен/получен на интерфейсе.",
+            "format": "int32"
+          },
+          "QueueLength": {
+            "type": "integer",
+            "description": "Возвращает или задаёт длину очереди пакетов.",
+            "format": "int32"
+          },
+          "DownloadErrorPercentage": {
+            "type": "number",
+            "description": "Возвращает или задаёт процент ошибок при отправлении пакетов.",
+            "format": "double"
+          },
+          "UploadErrorPercentage": {
+            "type": "number",
+            "description": "Возвращает или задаёт процент ошибок при запрашивании пакетов.",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Информация о интерфейсе канала связи."
+      },
+      "NetworkInfo": {
+        "type": "object",
+        "properties": {
+          "InterfacesInfo": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/InterfaceInfo"
+            },
+            "description": "Возвращает или задаёт информацию об интерфейсах каналов связи.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Информация о сети."
+      },
+      "NineCamsSystemComponentsInfo": {
+        "type": "object",
+        "properties": {
+          "Timestamp": {
+            "type": "string",
+            "description": "Возвращает или задаёт временную метку запроса.",
+            "format": "date-time"
+          },
+          "Error": {
+            "type": "integer",
+            "description": "Возвращает или задаёт статус ошибки.",
+            "format": "int32"
+          },
+          "State": {
+            "$ref": "#/components/schemas/NineCamsWorkingState"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Информация о доступности компонентов системы."
+      },
+      "NineCamsWorkingState": {
+        "type": "object",
+        "properties": {
+          "SequenceNumber": {
+            "type": "integer",
+            "description": "Возвращает или задаёт номер набора данных.",
+            "format": "int64"
+          },
+          "UpdateTime": {
+            "type": "string",
+            "description": "Возвращает время обновления данных.",
+            "format": "date-time"
+          },
+          "PublishTime": {
+            "type": "string",
+            "description": "Возвращает время публикации данных.",
+            "format": "date-time"
+          },
+          "ServiceAvailable": {
+            "$ref": "#/components/schemas/ServicesStatus"
+          },
+          "IsCamerasAvailable": {
+            "type": "object",
+            "properties": {
+              "CAM1": {
+                "type": "boolean"
+              },
+              "CAM2": {
+                "type": "boolean"
+              },
+              "CAM3": {
+                "type": "boolean"
+              },
+              "CAM4": {
+                "type": "boolean"
+              },
+              "CAM5": {
+                "type": "boolean"
+              },
+              "CAM6": {
+                "type": "boolean"
+              },
+              "CAM7": {
+                "type": "boolean"
+              },
+              "CAM8": {
+                "type": "boolean"
+              },
+              "CAM9": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false,
+            "description": "Возвращает или задаёт доступность камер.",
+            "nullable": true
+          },
+          "NetworkStorageAvailable": {
+            "type": "boolean",
+            "description": "Возвращает или задаёт доступность сетевого хранилища.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Расширенная информация о работоспособности системы."
+      },
+      "ServiceStatus": {
+        "enum": [
+          "Work",
+          "Warning",
+          "NotWork"
+        ],
+        "type": "string",
+        "description": "Статус работоспособности сервиса.\n\nWork (Сервис работает.)\n\nWarning (Сервис работает, но присутствуют ошибки.)\n\nNotWork (Сервис не работает.)",
+        "x-enumNames": [
+          "Work",
+          "Warning",
+          "NotWork"
+        ],
+        "x-enumDescriptions": [
+          "Сервис работает.",
+          "Сервис работает, но присутствуют ошибки.",
+          "Сервис не работает."
+        ]
+      },
+      "ServicesStatus": {
+        "type": "object",
+        "properties": {
+          "KernelAlive": {
+            "$ref": "#/components/schemas/ServiceStatus"
+          },
+          "NetworksAlive": {
+            "$ref": "#/components/schemas/ServiceStatus"
+          },
+          "PanoramaBuilderAlive": {
+            "$ref": "#/components/schemas/ServiceStatus"
+          },
+          "HorizonAlive": {
+            "$ref": "#/components/schemas/ServiceStatus"
+          },
+          "DistanceAlive": {
+            "$ref": "#/components/schemas/ServiceStatus"
+          },
+          "VideoServerAlive": {
+            "$ref": "#/components/schemas/ServiceStatus"
+          },
+          "ArchiveAlive": {
+            "$ref": "#/components/schemas/ServiceStatus"
+          },
+          "MonitoringNetworkAlive": {
+            "$ref": "#/components/schemas/ServiceStatus"
+          },
+          "EncoderAlive": {
+            "$ref": "#/components/schemas/ServiceStatus"
+          },
+          "NginxAlive": {
+            "$ref": "#/components/schemas/ServiceStatus"
+          },
+          "RetranslatorAlive": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ServiceStatus"
+            },
+            "description": "Возвращает статус работоспособности ретрансляторов видеопотока.",
+            "nullable": true
+          },
+          "TrackerAlive": {
+            "$ref": "#/components/schemas/ServiceStatus"
+          },
+          "TurntableServiceAlive": {
+            "$ref": "#/components/schemas/ServiceStatus"
+          },
+          "OrchestratorAlive": {
+            "$ref": "#/components/schemas/ServiceStatus"
+          },
+          "PanoramaArchiveAlive": {
+            "$ref": "#/components/schemas/ServiceStatus"
+          },
+          "PanoramaDistributorAlive": {
+            "$ref": "#/components/schemas/ServiceStatus"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Состояние работоспособности сервисов."
+      },
+      "SystemUsage": {
+        "type": "object",
+        "properties": {
+          "RAM": {
+            "$ref": "#/components/schemas/UsageRAM"
+          },
+          "CPU": {
+            "$ref": "#/components/schemas/UsageCPU"
+          },
+          "GPU": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageGPU"
+            },
+            "description": "Возвращает или задаёт использование графических процессоров.",
+            "nullable": true
+          },
+          "Storage": {
+            "$ref": "#/components/schemas/UsageStorage"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Использование отслеживаемой системы."
+      },
+      "UsageCPU": {
+        "type": "object",
+        "properties": {
+          "UsedPercent": {
+            "type": "number",
+            "description": "Возвращает или задаёт использование CPU в процентах.",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Использование центрального процессора."
+      },
+      "UsageGPU": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "description": "Возвращает или задаёт уникальный идентификатор GPU.",
+            "format": "uuid"
+          },
+          "TotalBytes": {
+            "$ref": "#/components/schemas/ByteSize"
+          },
+          "UsedBytes": {
+            "$ref": "#/components/schemas/ByteSize"
+          },
+          "UtilizationPercent": {
+            "type": "number",
+            "description": "Возвращает или задаёт использование GPU в процентах.",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Использование графического процессора."
+      },
+      "UsageRAM": {
+        "type": "object",
+        "properties": {
+          "TotalBytes": {
+            "$ref": "#/components/schemas/ByteSize"
+          },
+          "UsedBytes": {
+            "$ref": "#/components/schemas/ByteSize"
+          },
+          "UsedPercent": {
+            "type": "number",
+            "description": "Возвращает или задаёт использование RAM в процентах.",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Использование оперативной памяти."
+      },
+      "UsageStorage": {
+        "type": "object",
+        "properties": {
+          "TotalBytes": {
+            "$ref": "#/components/schemas/ByteSize"
+          },
+          "FreeBytes": {
+            "$ref": "#/components/schemas/ByteSize"
+          },
+          "UsedPercent": {
+            "type": "number",
+            "description": "Возвращает или задаёт использование памяти в процентах.",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Использование памяти файловой системы."
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Health",
+      "description": "Контроллер проверки текущего состояния сервиса."
+    },
+    {
+      "name": "Version",
+      "description": "Контроллер, который позволяет узнать версию сервиса."
+    },
+    {
+      "name": "Metrics",
+      "description": "Контроллер метрик полученных из Prometheus."
+    },
+    {
+      "name": "Network",
+      "description": "Контроллер метрик полученных из Prometheus."
+    },
+    {
+      "name": "SystemAvailability",
+      "description": "Контроллер доступности системы."
+    },
+    {
+      "name": "PrometheusMonitoringConfiguration",
+      "description": "Контроллер конфигураций сбора данных из Prometheus."
+    }
+  ]
+}

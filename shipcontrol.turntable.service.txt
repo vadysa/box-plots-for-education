@@ -1,0 +1,938 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "shipcontrol.turntable.service API",
+    "description": "Сервис взаимодействия с железом поворотной платформы.",
+    "version": "v1"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Проверить доступность сервиса.",
+        "responses": {
+          "200": {
+            "description": "Сервис доступен."
+          },
+          "404": {
+            "description": "Сервис недоступен."
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Проверить доступность сервиса.",
+        "responses": {
+          "200": {
+            "description": "Сервис доступен."
+          },
+          "404": {
+            "description": "Сервис недоступен."
+          }
+        }
+      }
+    },
+    "/turntable/rangefinder/health": {
+      "get": {
+        "tags": [
+          "Rangefinder"
+        ],
+        "summary": "Возвращает статус доступности устройства дальномера.",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/rangefinder/range": {
+      "get": {
+        "tags": [
+          "Rangefinder"
+        ],
+        "summary": "Определяет дистанцию до объектов.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RangeResultResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RangeResultResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RangeResultResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RangeResultResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RangeResultResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RangeResultResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/turntable/rangefinder/device/voltage": {
+      "get": {
+        "tags": [
+          "Rangefinder"
+        ],
+        "summary": "Определяет напряжение батареи устройства.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoltageResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoltageResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoltageResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoltageResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoltageResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoltageResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/turntable/rangefinder/device/status": {
+      "get": {
+        "tags": [
+          "Rangefinder"
+        ],
+        "summary": "Запрашивает значение регистра статуса устройства.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStatusRegisterResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStatusRegisterResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStatusRegisterResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStatusRegisterResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStatusRegisterResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStatusRegisterResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/turntable/parameters/pan": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "summary": "Устанавливает параметры дискретных команд управления поворотом.",
+        "requestBody": {
+          "description": "Параметры команд управления поворотом.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanTiltParameters"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanTiltParameters"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanTiltParameters"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanTiltParameters"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/parameters/tilt": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "summary": "Устанавливает параметры дискретных команд управления наклоном.",
+        "requestBody": {
+          "description": "Параметры команд управления наклоном.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanTiltParameters"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanTiltParameters"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanTiltParameters"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanTiltParameters"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/parameters/zoom": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "summary": "Устанавливает параметры дискретных команд управления зуммированием.",
+        "parameters": [
+          {
+            "name": "instantTime",
+            "in": "query",
+            "description": "Время применения дискретных команд управления зуммированием.",
+            "schema": {
+              "type": "string",
+              "format": "date-span"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/parameters/focus": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "summary": "Устанавливает параметры дискретных команд управления фокусом.",
+        "parameters": [
+          {
+            "name": "instantTime",
+            "in": "query",
+            "description": "Время применения дискретных команд управления фокусом.",
+            "schema": {
+              "type": "string",
+              "format": "date-span"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/parameters/iris": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "summary": "Устанавливает параметры дискретных команд управления диафрагмой.",
+        "parameters": [
+          {
+            "name": "instantTime",
+            "in": "query",
+            "description": "Время применения дискретных команд управления диафрагмой.",
+            "schema": {
+              "type": "string",
+              "format": "date-span"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/health": {
+      "get": {
+        "tags": [
+          "Turntable"
+        ],
+        "summary": "Возвращает статус доступности устройства поворотной платформы.",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/instant/pantilt": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "summary": "Применяет для камеры дискретную по времени операцию смещения в заданном направлении.",
+        "parameters": [
+          {
+            "name": "panTiltFlags",
+            "in": "query",
+            "description": "Доступные направления перемещения камеры.\n\nDown (Направление вниз.)\n\nUp (Направление вверх.)\n\nLeft (Направление влево.)\n\nRight (Направление вправо.)",
+            "schema": {
+              "$ref": "#/components/schemas/PanTiltFlags"
+            },
+            "x-enumNames": [
+              "Down",
+              "Up",
+              "Left",
+              "Right"
+            ],
+            "x-enumDescriptions": [
+              "Направление вниз.",
+              "Направление вверх.",
+              "Направление влево.",
+              "Направление вправо."
+            ]
+          }
+        ],
+        "requestBody": {
+          "description": "Параметры перемещения.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanTiltParameters"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanTiltParameters"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanTiltParameters"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PanTiltParameters"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/instant/zoom/tele": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "summary": "Применяет для камеры дискретную по времени операцию уменьшения уровня зумирования.",
+        "parameters": [
+          {
+            "name": "instantTime",
+            "in": "query",
+            "description": "Время применения операции.",
+            "schema": {
+              "type": "string",
+              "format": "date-span"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/instant/zoom/wide": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "summary": "Применяет для камеры дискретную по времени операцию увеличения уровня зумирования.",
+        "parameters": [
+          {
+            "name": "instantTime",
+            "in": "query",
+            "description": "Время применения операции.",
+            "schema": {
+              "type": "string",
+              "format": "date-span"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/instant/focus/near": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "summary": "Применяет для камеры дискретную по времени операцию фокусировки на ближнем объекте.",
+        "parameters": [
+          {
+            "name": "instantTime",
+            "in": "query",
+            "description": "Время применения операции.",
+            "schema": {
+              "type": "string",
+              "format": "date-span"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/instant/focus/far": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "summary": "Применяет для камеры дискретную по времени операцию фокусировки на дальнем объекте.",
+        "parameters": [
+          {
+            "name": "instantTime",
+            "in": "query",
+            "description": "Время применения операции.",
+            "schema": {
+              "type": "string",
+              "format": "date-span"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/instant/iris/open": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "summary": "Применяет для камеры дискретную по времени операцию открытия диафрагмы.",
+        "parameters": [
+          {
+            "name": "instantTime",
+            "in": "query",
+            "description": "Время применения операции.",
+            "schema": {
+              "type": "string",
+              "format": "date-span"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/instant/iris/close": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "summary": "Применяет для камеры дискретную по времени операцию закрытия диафрагмы.",
+        "parameters": [
+          {
+            "name": "instantTime",
+            "in": "query",
+            "description": "Время применения операции.",
+            "schema": {
+              "type": "string",
+              "format": "date-span"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/continuous/pantilt": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/continuous/pantilt/stop": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/continuous/zoom/tele": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/continuous/zoom/tele/stop": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/continuous/zoom/wide": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/continuous/zoom/wide/stop": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/continuous/iris/open": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/continuous/iris/open/stop": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/continuous/iris/close": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/turntable/continuous/iris/close/stop": {
+      "post": {
+        "tags": [
+          "Turntable"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/version": {
+      "get": {
+        "tags": [
+          "Version"
+        ],
+        "summary": "Возвращает версию сервиса в виде строки.",
+        "responses": {
+          "200": {
+            "description": "Версия сервиса получена."
+          },
+          "404": {
+            "description": "Версию сервиса получить не удалось."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GetStatusRegisterResponse": {
+        "type": "object",
+        "properties": {
+          "Command": {
+            "$ref": "#/components/schemas/RangefinderInputCommand"
+          },
+          "Result": {
+            "$ref": "#/components/schemas/StatusRegisterResult"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Ответ устройства на команду ShipControl.Rangefinder.Glr14.Protocol.Registers.RangefinderInputCommand.GetStatusRegister\r\nс данными статуса устройства."
+      },
+      "PanTiltFlags": {
+        "enum": [
+          "Down",
+          "Up",
+          "Left",
+          "Right"
+        ],
+        "type": "string",
+        "description": "Флаги направления для типа команды движения.\n\nDown (Направление вниз.)\n\nUp (Направление вверх.)\n\nLeft (Направление влево.)\n\nRight (Направление вправо.)",
+        "x-enumNames": [
+          "Down",
+          "Up",
+          "Left",
+          "Right"
+        ],
+        "x-enumDescriptions": [
+          "Направление вниз.",
+          "Направление вверх.",
+          "Направление влево.",
+          "Направление вправо."
+        ]
+      },
+      "PanTiltParameters": {
+        "type": "object",
+        "properties": {
+          "Speed": {
+            "type": "integer",
+            "description": "Возвращает или задаёт скорость перемещения.",
+            "format": "int32"
+          },
+          "IsReversed": {
+            "type": "boolean",
+            "description": "Возвращает или задаёт нужно ли инвертировать движение по оси.",
+            "nullable": true
+          },
+          "InstantWaitTime": {
+            "type": "string",
+            "description": "Возвращает или задаёт время применения мгновенного перемещения.",
+            "format": "date-span",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Параметры движения камеры."
+      },
+      "RangeResult": {
+        "type": "object",
+        "properties": {
+          "Target1": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Target2": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Target3": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RangeResultResponse": {
+        "type": "object",
+        "properties": {
+          "Command": {
+            "$ref": "#/components/schemas/RangefinderInputCommand"
+          },
+          "Result": {
+            "$ref": "#/components/schemas/RangeResult"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Ответ устройства на команду ShipControl.Rangefinder.Glr14.Protocol.Registers.RangefinderInputCommand.FindRange\r\nс данными об обнаруженных целях."
+      },
+      "RangefinderInputCommand": {
+        "enum": [
+          "LedOff",
+          "LedOn",
+          "FindRange",
+          "GetVoltageRegister",
+          "GetModuleAddress",
+          "SetModuleAddress",
+          "GetStatusRegister",
+          "LedCommand"
+        ],
+        "type": "string",
+        "description": "Пакет данных \"Команда управления\" (байт 2), отправляемого в модуль.\n\nLedOff (Выключить светодиод подсветки (Light-emitting diode).)\n\nLedOn (Включить светодиод подсветки (Light-emitting diode).)\n\nFindRange (Измерить дальность.)\n\nGetVoltageRegister (Передать значение напряжения батареи.)\n\nGetModuleAddress (Передать адрес модуля.)\n\nSetModuleAddress (Установить адрес модуля.)\n\nGetStatusRegister (Передать значение регистра «Статус».)\n\nLedCommand (Команда изменения активности подсветки. Отсутствует в протоколе.)",
+        "x-enumNames": [
+          "LedOff",
+          "LedOn",
+          "FindRange",
+          "GetVoltageRegister",
+          "GetModuleAddress",
+          "SetModuleAddress",
+          "GetStatusRegister",
+          "LedCommand"
+        ],
+        "x-enumDescriptions": [
+          "Выключить светодиод подсветки (Light-emitting diode).",
+          "Включить светодиод подсветки (Light-emitting diode).",
+          "Измерить дальность.",
+          "Передать значение напряжения батареи.",
+          "Передать адрес модуля.",
+          "Установить адрес модуля.",
+          "Передать значение регистра «Статус».",
+          "Команда изменения активности подсветки. Отсутствует в протоколе."
+        ]
+      },
+      "StatusRegister": {
+        "type": "object",
+        "properties": {
+          "ZeroBit": {
+            "type": "boolean",
+            "description": "Нуль-бит, всегда имеет значение 0 (бит 7).",
+            "readOnly": true
+          },
+          "Ready": {
+            "type": "boolean",
+            "description": "Бит готовности R (бит 6).",
+            "readOnly": true
+          },
+          "StartImpulse": {
+            "type": "boolean",
+            "description": "Наличие импульса S \"Старт\" (бит 5).",
+            "readOnly": true
+          },
+          "Charged": {
+            "type": "boolean",
+            "description": "Заряд C (бит 4).",
+            "readOnly": true
+          },
+          "Target1CountBit": {
+            "type": "boolean",
+            "description": "Количество обнаруженных целей T1 (бит 3).",
+            "readOnly": true
+          },
+          "Target0CountBit": {
+            "type": "boolean",
+            "description": "Количество обнаруженных целей T0 (бит 2).",
+            "readOnly": true
+          },
+          "TargetCount": {
+            "type": "integer",
+            "description": "Количество обнаруженных целей.",
+            "format": "int32",
+            "readOnly": true
+          },
+          "Led": {
+            "type": "boolean",
+            "description": "Подсветка фотодиода L (бит 1).",
+            "readOnly": true
+          },
+          "M": {
+            "type": "boolean",
+            "description": "Неиспользуемый бит, всегда имеет значение 1 (бит 0).",
+            "readOnly": true
+          },
+          "ByteInterpretation": {
+            "type": "integer",
+            "description": "Байтовое представление регистра статуса.",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Регистр статуса (байт 3) пакета данных, отправляемого из модуля."
+      },
+      "StatusRegisterResult": {
+        "type": "object",
+        "properties": {
+          "Register": {
+            "$ref": "#/components/schemas/StatusRegister"
+          },
+          "Counter": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VoltageResponse": {
+        "type": "object",
+        "properties": {
+          "Command": {
+            "$ref": "#/components/schemas/RangefinderInputCommand"
+          },
+          "Result": {
+            "type": "number",
+            "description": "Результат измерения напряжения батареи.",
+            "format": "double",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Ответ устройства на команду ShipControl.Rangefinder.Glr14.Protocol.Registers.RangefinderInputCommand.GetVoltageRegister\r\nс данными о напряжении батареи питания."
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Health",
+      "description": "Контроллер проверки текущего состояния сервиса."
+    },
+    {
+      "name": "Rangefinder",
+      "description": "Управление поворотной платформой."
+    },
+    {
+      "name": "Turntable",
+      "description": "Управление поворотной платформой."
+    },
+    {
+      "name": "Version",
+      "description": "Контроллер, который позволяет узнать версию сервиса."
+    }
+  ]
+}

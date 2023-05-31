@@ -1,0 +1,1237 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ShipControl Encoder Service API",
+    "description": "Энкодер камер машинного зрения.",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/encoder": {
+      "get": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Возвращает информацию обо всех настроенных видеоисточниках.",
+        "responses": {
+          "200": {
+            "description": "Информация обо всех настроенных видеоисточниках получена.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EncoderSourceInfo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceName}": {
+      "get": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Возвращает информацию об потоках видеоисточника c именем sourceName.",
+        "parameters": [
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "Имя видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Информация об потоке видеоисточника c именем sourceName получена."
+          },
+          "404": {
+            "description": "Был указан не существующий видеоисточник."
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceGuid}": {
+      "get": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Возвращает информацию об потоках видеоисточника с GUID sourceGuid.",
+        "parameters": [
+          {
+            "name": "sourceGuid",
+            "in": "path",
+            "description": "GUID видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Информация об потоке видеоисточника с GUID sourceGuid получена."
+          },
+          "404": {
+            "description": "Был указан не существующий видеоисточник."
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceName}/start": {
+      "post": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Запускает видеоисточник с именем sourceName.",
+        "parameters": [
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "Имя видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Видеоисточник с именем sourceName переведён в запущенное состояние.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Был указан не существующий видеоисточник.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceGuid}/start": {
+      "post": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Запускает видеоисточник с GUID sourceGuid.",
+        "parameters": [
+          {
+            "name": "sourceGuid",
+            "in": "path",
+            "description": "GUID видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Видеоисточник с GUID sourceGuid переведён в запущенное состояние.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Был указан не существующий видеоисточник.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceName}/stop": {
+      "post": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Останавливает видеоисточник с именем sourceName.",
+        "parameters": [
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "Имя видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Был указан не существующий видеоисточник.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Видеоисточник с именем sourceName остановлен."
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceGuid}/stop": {
+      "post": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Останавливает видеоисточник с GUID sourceGuid.",
+        "parameters": [
+          {
+            "name": "sourceGuid",
+            "in": "path",
+            "description": "Имя видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Был указан не существующий видеоисточник.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Видеоисточник с GUID sourceGuid остановлен."
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceName}/{streamName}/start": {
+      "post": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Запускает видеопоток с именем streamName у видеоисточника с именем sourceName.",
+        "parameters": [
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "Имя видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "streamName",
+            "in": "path",
+            "description": "Имя видеопотока.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Был указан не существующий видеоисточник или видеопоток.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Была предпринято запустить видеопоток у видеоисточника, который был остановлен.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Видеопоток с именем streamName для видеоисточника с именем sourceName переведён в запущенное состояние."
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceGuid}/{streamName}/start": {
+      "post": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Запускает видеопоток с именем streamName у видеоисточника с GUID sourceGuid.",
+        "parameters": [
+          {
+            "name": "sourceGuid",
+            "in": "path",
+            "description": "GUID видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "streamName",
+            "in": "path",
+            "description": "Имя видеопотока.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Был указан не существующий видеоисточник или видеопоток.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Была предпринято запустить видеопоток у видеоисточника, который был остановлен.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Видеопоток с именем streamName для видеоисточника с GUID sourceGuid переведён в запущенное состояние."
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceGuid}/{streamGuid}/start": {
+      "post": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Запускает видеопоток с GUID streamGuid у видеоисточника с GUID sourceGuid.",
+        "parameters": [
+          {
+            "name": "sourceGuid",
+            "in": "path",
+            "description": "GUID видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "streamGuid",
+            "in": "path",
+            "description": "GUID видеопотока.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Был указан не существующий видеоисточник или видеопоток.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Была предпринято запустить видеопоток у видеоисточника, который был остановлен.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Видеопоток с GUID streamGuid для видеоисточника с GUID sourceGuid переведён в запущенное состояние."
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceName}/{streamGuid}/start": {
+      "post": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Запускает видеопоток с GUID streamGuid у видеоисточника с именем sourceName.",
+        "parameters": [
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "Имя видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "streamGuid",
+            "in": "path",
+            "description": "GUID видеопотока.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Был указан не существующий видеоисточник или видеопоток.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Была предпринято запустить видеопоток у видеоисточника, который был остановлен.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Видеопоток с GUID streamGuid для видеоисточника с именем sourceName переведён в запущенное состояние."
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceName}/{streamName}/stop": {
+      "post": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Останавливает видеопоток с именем streamName у видеоисточника с именем sourceName.",
+        "parameters": [
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "Имя видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "streamName",
+            "in": "path",
+            "description": "Имя видеопотока.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Был указан не существующий видеоисточник или видеопоток.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Видеопоток с именем streamName для видеоисточника с именем sourceName переведён в остановленное состояние."
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceGuid}/{streamName}/stop": {
+      "post": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Останавливает видеопоток с именем streamName у видеоисточника с GUID sourceGuid.",
+        "parameters": [
+          {
+            "name": "sourceGuid",
+            "in": "path",
+            "description": "GUID видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "streamName",
+            "in": "path",
+            "description": "Имя видеопотока.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Был указан не существующий видеоисточник или видеопоток.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Видеопоток с именем streamName для видеоисточника с GUID sourceGuid переведён в остановленное состояние."
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceGuid}/{streamGuid}/stop": {
+      "post": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Останавливает видеопоток с GUID streamGuid у видеоисточника с GUID sourceGuid.",
+        "parameters": [
+          {
+            "name": "sourceGuid",
+            "in": "path",
+            "description": "GUID видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "streamGuid",
+            "in": "path",
+            "description": "GUID видеопотока.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Был указан не существующий видеоисточник или видеопоток.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Видеопоток с GUID streamGuid для видеоисточника с GUID sourceGuid переведён в остановленное состояние."
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceName}/{streamGuid}/stop": {
+      "post": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Останавливает видеопоток с GUID streamGuid у видеоисточника с именем sourceName.",
+        "parameters": [
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "Имя видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "streamGuid",
+            "in": "path",
+            "description": "GUID видеопотока.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Был указан не существующий видеоисточник или видеопоток.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Видеопоток с GUID streamGuid для видеоисточника с именем sourceName переведён в остановленное состояние."
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceName}/{streamName}/stream.ts": {
+      "get": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Получает поток видео в контейнере MPEG TS потока с именем sourceName видеоисточника с именем sourceName.",
+        "parameters": [
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "Имя видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "streamName",
+            "in": "path",
+            "description": "Имя потока видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Возвращён поток видео в контейнере MPEG TS."
+          },
+          "409": {
+            "description": "Поток видео в контейнере MPEG TS не запущен.",
+            "content": {
+              "video/mp2t": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          },
+          "404": {
+            "description": "Был указан не существующий элемент."
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceGuid}/{streamName}/stream.ts": {
+      "get": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Получает поток видео в контейнере MPEG TS потока с именем streamName видеоисточника с GUID sourceGuid.",
+        "parameters": [
+          {
+            "name": "sourceGuid",
+            "in": "path",
+            "description": "GUID видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "streamName",
+            "in": "path",
+            "description": "Имя потока видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Возвращён поток видео в контейнере MPEG TS."
+          },
+          "409": {
+            "description": "Поток видео в контейнере MPEG TS не запущен.",
+            "content": {
+              "video/mp2t": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          },
+          "404": {
+            "description": "Был указан не существующий элемент."
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceGuid}/{streamGuid}/stream.ts": {
+      "get": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Получает поток видео в контейнере MPEG TS потока c GUID streamGuid видеоисточника c GUID sourceGuid.",
+        "parameters": [
+          {
+            "name": "sourceGuid",
+            "in": "path",
+            "description": "GUID видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "streamGuid",
+            "in": "path",
+            "description": "GUID видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Возвращён поток видео в контейнере MPEG TS."
+          },
+          "409": {
+            "description": "Поток видео в контейнере MPEG TS не запущен.",
+            "content": {
+              "video/mp2t": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          },
+          "404": {
+            "description": "Был указан не существующий элемент."
+          }
+        }
+      }
+    },
+    "/api/v1/encoder/{sourceName}/{streamGuid}/stream.ts": {
+      "get": {
+        "tags": [
+          "Encoder"
+        ],
+        "summary": "Получает поток видео в контейнере MPEG TS потока с именем sourceName видеоисточника с GUID streamGuid.",
+        "parameters": [
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "Имя видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "streamGuid",
+            "in": "path",
+            "description": "GUID видеоисточника.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Возвращён поток видео в контейнере MPEG TS."
+          },
+          "409": {
+            "description": "Поток видео в контейнере MPEG TS не запущен.",
+            "content": {
+              "video/mp2t": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера."
+          },
+          "404": {
+            "description": "Был указан не существующий элемент."
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Проверить доступность сервиса.",
+        "responses": {
+          "200": {
+            "description": "Сервис доступен."
+          },
+          "404": {
+            "description": "Сервис недоступен."
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Проверить доступность сервиса.",
+        "responses": {
+          "200": {
+            "description": "Сервис доступен."
+          },
+          "404": {
+            "description": "Сервис недоступен."
+          }
+        }
+      }
+    },
+    "/version": {
+      "get": {
+        "tags": [
+          "Version"
+        ],
+        "summary": "Возвращает версию сервиса в виде строки.",
+        "responses": {
+          "200": {
+            "description": "Версия сервиса получена."
+          },
+          "404": {
+            "description": "Версию сервиса получить не удалось."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EncoderSourceInfo": {
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string",
+            "description": "Возвращает уникальный идентификатор источника видеопотока.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Возвращает имя источника видеопотока.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Возвращает описание источника видеопотока.",
+            "nullable": true
+          },
+          "connectionString": {
+            "type": "string",
+            "description": "Возвращает строчку подключения к видеопотоку.",
+            "nullable": true
+          },
+          "runningStatus": {
+            "$ref": "#/components/schemas/RunningStatus"
+          },
+          "imageSourceState": {
+            "$ref": "#/components/schemas/ImageSourceStateType"
+          },
+          "streams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EncoderStreamInfo"
+            },
+            "description": "Возвращает информацию об потоках видео.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Хранит информацию об источнике видео."
+      },
+      "EncoderStreamInfo": {
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string",
+            "description": "Возвращает уникальный идентификатор видеопотока.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Возвращает имя видеопотока.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Возвращает описание видеопотока.",
+            "nullable": true
+          },
+          "isRunning": {
+            "type": "boolean",
+            "description": "Возвращает активность видеопотока."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Хранит информацию об потоке закодированного видео."
+      },
+      "ImageSourceStateType": {
+        "enum": [
+          0,
+          1,
+          4,
+          16,
+          64,
+          -2147483648,
+          -2147483646,
+          -2147483640,
+          -2147483616
+        ],
+        "type": "integer",
+        "description": "Тип состояния источника изображений.\n\n0 = NotConfigured (Не настроен.)\n\n1 = Closed (Закрыт.)\n\n4 = Running (Источник работает.)\n\n16 = NoSignal (Нет сигнала.)\n\n64 = Disposed (Источник ликвидирован.)\n\n-2147483648 = TransitionalFlag (Флаг переходного состояния.)\n\n-2147483646 = Opening (Открывается.)\n\n-2147483640 = Closing (Закрывается.)\n\n-2147483616 = Disposing (Источник ликвидируется.)",
+        "format": "int32",
+        "x-enumNames": [
+          "NotConfigured",
+          "Closed",
+          "Running",
+          "NoSignal",
+          "Disposed",
+          "TransitionalFlag",
+          "Opening",
+          "Closing",
+          "Disposing"
+        ],
+        "x-enumDescriptions": [
+          "Не настроен.",
+          "Закрыт.",
+          "Источник работает.",
+          "Нет сигнала.",
+          "Источник ликвидирован.",
+          "Флаг переходного состояния.",
+          "Открывается.",
+          "Закрывается.",
+          "Источник ликвидируется."
+        ]
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "RunningStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "description": "Статус работы сервиса\n\n0 = Stopped (Остановлен.)\n\n1 = Starting (Запускается.)\n\n2 = Stopping (Останавливается.)\n\n3 = Running (Работает.)\n\n4 = Restarting (Перезапускается.)\n\n5 = Failed (Произошла ошибка переподключения.)",
+        "format": "int32",
+        "x-enumNames": [
+          "Stopped",
+          "Starting",
+          "Stopping",
+          "Running",
+          "Restarting",
+          "Failed"
+        ],
+        "x-enumDescriptions": [
+          "Остановлен.",
+          "Запускается.",
+          "Останавливается.",
+          "Работает.",
+          "Перезапускается.",
+          "Произошла ошибка переподключения."
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Health",
+      "description": "Контроллер проверки текущего состояния сервиса."
+    },
+    {
+      "name": "Version",
+      "description": "Контроллер, который позволяет узнать версию сервиса."
+    },
+    {
+      "name": "Encoder",
+      "description": "Предоставляет доступ к настроенным поток кодированного видео."
+    }
+  ]
+}
