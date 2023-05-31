@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "shipcontrol.turntable.service API",
+    "title": "ShipControl Turntable Service API",
     "description": "Сервис взаимодействия с железом поворотной платформы.",
     "version": "v1"
   },
